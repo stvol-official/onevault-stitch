@@ -7,54 +7,49 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    colors: {
-                        "primary": "#000000",
-                        "navy-accent": "#1B2A4A",
-                        "border-light": "#E5E5E5",
-                        "text-main": "#0D0D0D",
-                        "background-light": "#f7f7f7",
-                        "background-dark": "#191919",
-                    },
-                    fontFamily: {
-                        "sans": ["Inter", "sans-serif"],
-                        "display": ["Inter", "sans-serif"]
-                    },
-                    borderRadius: {
-                        "DEFAULT": "0.125rem",
-                        "lg": "0.25rem",
-                        "xl": "0.5rem",
-                        "full": "0.75rem"
-                    },
+    tailwind.config = {
+        darkMode: "class",
+        theme: {
+            extend: {
+                colors: {
+                    "primary": "#000000",
+                    "navy-accent": "#1B2A4A",
+                    "border-light": "#E5E5E5",
+                    "text-main": "#0D0D0D",
+                    "background-light": "#f7f7f7",
+                    "background-dark": "#191919",
+                },
+                fontFamily: {
+                    "sans": ["Inter", "sans-serif"],
+                    "display": ["Inter", "sans-serif"]
+                },
+                borderRadius: {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
                 },
             },
-        }
-    </script>
+        },
+    }
+</script>
 <style type="text/tailwindcss">
-        @layer base {
-            body {
-                @apply font-sans text-text-main bg-background-light dark:bg-background-dark;
-            }
-        }
-        .navy-bg {
-            background-color: #1B2A4A;
-        }
-        select {
-            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%2364748b' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
-            background-position: right 0.5rem center;
-            background-repeat: no-repeat;
-            background-size: 1.5em 1.5em;
-            padding-right: 2.5rem;
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
-        }
-    </style>
+    .navy-bg {
+        background-color: #1B2A4A;
+    }
+    select {
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%2364748b' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+        background-position: right 0.5rem center;
+        background-repeat: no-repeat;
+        background-size: 1.5em 1.5em;
+        padding-right: 2.5rem;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+    }
+</style>
 </head>
-<body class="selection:bg-navy-accent/10">
+<body class="font-sans text-text-main bg-background-light dark:bg-background-dark selection:bg-navy-accent/10">
 <header class="w-full border-b border-[#E5E5E5] bg-white sticky top-0 z-50">
 <div class="max-w-[1200px] mx-auto flex items-center justify-between px-6 py-4">
 <div class="flex items-center gap-10">
@@ -65,16 +60,17 @@
 <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
 <a class="text-slate-500 hover:text-primary transition-colors font-display" href="allocator.html">Allocate</a>
 <a class="text-primary border-b-2 border-primary pb-0.5 font-display" href="discover.html">Discover</a>
-<a class="text-slate-500 hover:text-primary transition-colors font-display" href="portfolio_admin_-_main.html">Portfolio</a>
+<a class="text-slate-500 hover:text-primary transition-colors font-display" href="portfolio_main.html">Portfolio</a>
 </nav>
 </div>
 <div class="flex items-center gap-6">
 <button class="bg-primary text-white text-xs font-bold uppercase tracking-widest px-5 py-2.5 hover:bg-slate-800 transition-colors font-display">
-                Connect Wallet
-            </button>
+    Connect Wallet
+</button>
 </div>
 </div>
 </header>
+
 <main class="max-w-[1200px] mx-auto px-6 py-12">
 <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 border-b border-border-light pb-4">
 <div>
@@ -87,84 +83,18 @@
 <button class="text-sm font-medium text-slate-400 pb-4 -mb-[18px] hover:text-slate-600 font-display">Assets</button>
 </div>
 </div>
+
+<!-- Featured vaults (data-driven) -->
 <section class="mb-16">
-<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-<div class="navy-bg text-white p-8 flex flex-col justify-between relative overflow-hidden rounded-lg min-h-[480px]">
-<div class="z-10">
-<span class="text-[10px] font-bold uppercase tracking-[0.3em] opacity-70 mb-4 block font-display">Institutional Pick</span>
-<h3 class="text-4xl font-bold mb-4 leading-tight tracking-tight text-white font-display">Arc Low Risk</h3>
-<p class="text-slate-300 text-sm font-normal leading-relaxed mb-8 font-display">
-                            Stable yield from institutional lending.
-                        </p>
-<div class="flex gap-8 mb-8">
-<div>
-<p class="text-[10px] uppercase tracking-widest opacity-60 mb-1 font-display">Target APY</p>
-<p class="text-4xl font-bold font-display">3.5%</p>
-</div>
-</div>
-</div>
-<div class="z-10">
-<button onclick="window.location.href='vault_detail.html'" class="bg-white text-navy-accent w-full py-3 font-bold uppercase tracking-widest text-xs hover:bg-slate-100 transition-colors font-display">
-                            Invest Now
-                        </button>
-</div>
-<div class="absolute right-[-20%] bottom-[-10%] opacity-10 pointer-events-none">
-<span class="material-symbols-outlined text-[200px]">shield</span>
-</div>
-</div>
-<div class="navy-bg text-white p-8 flex flex-col justify-between relative overflow-hidden rounded-lg min-h-[480px]">
-<div class="z-10">
-<span class="text-[10px] font-bold uppercase tracking-[0.3em] opacity-70 mb-4 block font-display">Institutional Pick</span>
-<h3 class="text-4xl font-bold mb-4 leading-tight tracking-tight text-white font-display">Arc Medium Risk</h3>
-<p class="text-slate-300 text-sm font-normal leading-relaxed mb-8 font-display">
-                            Optimized yield from curated DeFi protocols.
-                        </p>
-<div class="flex gap-8 mb-8">
-<div>
-<p class="text-[10px] uppercase tracking-widest opacity-60 mb-1 font-display">Target APY</p>
-<p class="text-4xl font-bold font-display">5.5%</p>
-</div>
-</div>
-</div>
-<div class="z-10">
-<button class="bg-white text-navy-accent w-full py-3 font-bold uppercase tracking-widest text-xs hover:bg-slate-100 transition-colors font-display">
-                            Invest Now
-                        </button>
-</div>
-<div class="absolute right-[-20%] bottom-[-10%] opacity-10 pointer-events-none">
-<span class="material-symbols-outlined text-[200px]">account_balance_wallet</span>
-</div>
-</div>
-<div class="navy-bg text-white p-8 flex flex-col justify-between relative overflow-hidden rounded-lg min-h-[480px]">
-<div class="z-10">
-<span class="text-[10px] font-bold uppercase tracking-[0.3em] opacity-70 mb-4 block font-display">Institutional Pick</span>
-<h3 class="text-4xl font-bold mb-4 leading-tight tracking-tight text-white font-display">Arc High Risk</h3>
-<p class="text-slate-300 text-sm font-normal leading-relaxed mb-8 font-display">
-                            High-performance yield from structured options.
-                        </p>
-<div class="flex gap-8 mb-8">
-<div>
-<p class="text-[10px] uppercase tracking-widest opacity-60 mb-1 font-display">Target APY</p>
-<p class="text-4xl font-bold font-display">7.5%</p>
-</div>
-</div>
-</div>
-<div class="z-10">
-<button class="bg-white text-navy-accent w-full py-3 font-bold uppercase tracking-widest text-xs hover:bg-slate-100 transition-colors font-display">
-                            Invest Now
-                        </button>
-</div>
-<div class="absolute right-[-20%] bottom-[-10%] opacity-10 pointer-events-none">
-<span class="material-symbols-outlined text-[200px]">trending_up</span>
-</div>
-</div>
-</div>
+<div id="featured-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6"></div>
 </section>
+
+<!-- Vault browser -->
 <section class="mb-20">
 <div class="flex flex-wrap items-center gap-4 mb-8 bg-white p-4 rounded-lg border border-border-light">
 <div class="flex flex-col gap-1">
 <label class="text-[10px] font-bold uppercase tracking-widest text-slate-400 ml-1 font-display">Asset Class</label>
-<select class="text-sm font-medium border-border-light rounded bg-slate-50 min-w-[160px] focus:ring-primary focus:border-primary font-display">
+<select id="filter-asset" class="text-sm font-medium border-border-light rounded bg-slate-50 min-w-[160px] focus:ring-primary focus:border-primary font-display">
 <option>All Assets</option>
 <option>Stablecoins</option>
 <option>Ethereum</option>
@@ -174,7 +104,7 @@
 </div>
 <div class="flex flex-col gap-1">
 <label class="text-[10px] font-bold uppercase tracking-widest text-slate-400 ml-1 font-display">APY Range</label>
-<select class="text-sm font-medium border-border-light rounded bg-slate-50 min-w-[160px] focus:ring-primary focus:border-primary font-display">
+<select id="filter-apy" class="text-sm font-medium border-border-light rounded bg-slate-50 min-w-[160px] focus:ring-primary focus:border-primary font-display">
 <option>Any Yield</option>
 <option>0% - 5%</option>
 <option>5% - 10%</option>
@@ -184,7 +114,7 @@
 </div>
 <div class="flex flex-col gap-1">
 <label class="text-[10px] font-bold uppercase tracking-widest text-slate-400 ml-1 font-display">TVL</label>
-<select class="text-sm font-medium border-border-light rounded bg-slate-50 min-w-[160px] focus:ring-primary focus:border-primary font-display">
+<select id="filter-tvl" class="text-sm font-medium border-border-light rounded bg-slate-50 min-w-[160px] focus:ring-primary focus:border-primary font-display">
 <option>Any TVL</option>
 <option>&gt; $1B</option>
 <option>$500M - $1B</option>
@@ -193,7 +123,7 @@
 </div>
 <div class="flex flex-col gap-1">
 <label class="text-[10px] font-bold uppercase tracking-widest text-slate-400 ml-1 font-display">Risk Profile</label>
-<select class="text-sm font-medium border-border-light rounded bg-slate-50 min-w-[160px] focus:ring-primary focus:border-primary font-display">
+<select id="filter-risk" class="text-sm font-medium border-border-light rounded bg-slate-50 min-w-[160px] focus:ring-primary focus:border-primary font-display">
 <option>All Risks</option>
 <option>Low (A/A+)</option>
 <option>Medium (B/B+)</option>
@@ -201,12 +131,13 @@
 </select>
 </div>
 <div class="ml-auto self-end">
-<button class="text-xs font-bold uppercase tracking-widest text-slate-400 hover:text-primary transition-colors flex items-center gap-2 mb-2 font-display">
+<button id="reset-filters" class="text-xs font-bold uppercase tracking-widest text-slate-400 hover:text-primary transition-colors flex items-center gap-2 mb-2 font-display">
 <span class="material-symbols-outlined text-base">refresh</span>
-                        Reset
-                    </button>
+Reset
+</button>
 </div>
 </div>
+
 <div class="border border-border-light bg-white rounded-lg">
 <div class="grid grid-cols-12 gap-4 px-6 py-4 text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400 border-b border-border-light bg-slate-50/50">
 <div class="col-span-1 font-display">Asset</div>
@@ -216,93 +147,262 @@
 <div class="col-span-2 text-center font-display">Risk Profile</div>
 <div class="col-span-1"></div>
 </div>
-<div class="divide-y divide-border-light">
-<div class="grid grid-cols-12 items-center gap-4 px-6 py-8 hover:bg-slate-50 transition-colors cursor-pointer group">
-<div class="col-span-1">
-<div class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center border border-border-light">
-<img alt="ETH Icon" class="w-6 h-6" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4iT1QGgk9YSPhDhuTxTnweEPErmG-iAXtRcvH3cyR4icBZWW-NkKYeVf-co5gHJcfB18X-R3p6vYyiVI69szuD3_ebLLWJdZfR75R-uX99YYZw3dscYsUrKM8cpsfkRsAcnUeklFVKY-TCC_U5V7cjbrDWLadhVWidD-ceCJ9eUInQG9V6YYn5PV2U9bPP73kNS93wwo43zhGF3wCgjj0W8k9f1gGqSdAsfztSrPmRMxM0zy3vzcpm-0IPDSCF-ZKtpMoO6OP4A0"/>
+<div id="vault-list" class="divide-y divide-border-light"></div>
 </div>
-</div>
-<div class="col-span-4">
-<p class="text-lg font-bold text-text-main group-hover:underline font-display">Lido Staked ETH</p>
-<p class="text-xs text-slate-500 font-normal font-display">Curated by Lido Finance</p>
-</div>
-<div class="col-span-2 text-right">
-<p class="text-lg font-bold text-navy-accent font-display">4.20%</p>
-</div>
-<div class="col-span-2 text-right">
-<p class="text-sm text-slate-600 font-normal font-display">$1.24B</p>
-</div>
-<div class="col-span-2 flex justify-center">
-<div class="w-8 h-8 rounded-full border border-border-light flex items-center justify-center text-[10px] font-bold text-slate-500 font-display">
-                                A+
-                            </div>
-</div>
-<div class="col-span-1 text-right">
-<span class="material-symbols-outlined text-slate-300 group-hover:text-primary transition-colors">chevron_right</span>
-</div>
-</div>
-<div class="grid grid-cols-12 items-center gap-4 px-6 py-8 hover:bg-slate-50 transition-colors cursor-pointer group">
-<div class="col-span-1">
-<div class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center border border-border-light">
-<img alt="USDC Icon" class="w-6 h-6" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDpeNg9PmhaOY7li73eV0QtjUnvNZSZzMExynF_kEC7pCv1pc7DSEQaSE6Ogsovopdiq_VF5219kRwSP0366xXDwkrA19FYlNI89Iz15_DrUVVarnvMqC3yjmB-CQxqGltKa7EW6ArSuUwa8p3DGWNxDTk6AXbi-Azc9nE5DI5pf0M8l_6fFGVlnuoZ92Y0PjDfFP9g-wBxZ09pB74zY9A2_VPaf-c9HBb9MnZo3MChJ065-i_A3TRY0U6cEfpNplQqhUOtKuRw_0c"/>
-</div>
-</div>
-<div class="col-span-4">
-<p class="text-lg font-bold text-text-main group-hover:underline font-display">Circle Yield Plus</p>
-<p class="text-xs text-slate-500 font-normal font-display">Curated by Circle</p>
-</div>
-<div class="col-span-2 text-right">
-<p class="text-lg font-bold text-navy-accent font-display">5.15%</p>
-</div>
-<div class="col-span-2 text-right">
-<p class="text-sm text-slate-600 font-normal font-display">$850M</p>
-</div>
-<div class="col-span-2 flex justify-center">
-<div class="w-8 h-8 rounded-full border border-border-light flex items-center justify-center text-[10px] font-bold text-slate-500 font-display">
-                                A
-                            </div>
-</div>
-<div class="col-span-1 text-right">
-<span class="material-symbols-outlined text-slate-300 group-hover:text-primary transition-colors">chevron_right</span>
-</div>
-</div>
-</div>
-</div>
+
 <div class="mt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-<span class="text-xs font-medium text-slate-500 font-display">Page 1 of 5</span>
-<div class="flex items-center gap-4">
-<button class="flex items-center gap-1 text-[10px] font-bold uppercase tracking-widest text-slate-300 cursor-not-allowed font-display">
-<span class="material-symbols-outlined text-sm">chevron_left</span>
-                        Previous
-                    </button>
-<div class="flex items-center gap-1.5">
-<button class="w-7 h-7 rounded-full bg-primary text-white text-[10px] font-bold flex items-center justify-center font-display">1</button>
-<button class="w-7 h-7 rounded-full border border-border-light text-slate-500 text-[10px] font-bold flex items-center justify-center hover:bg-slate-50 transition-colors font-display">2</button>
-<button class="w-7 h-7 rounded-full border border-border-light text-slate-500 text-[10px] font-bold flex items-center justify-center hover:bg-slate-50 transition-colors font-display">3</button>
-<span class="text-slate-300 px-0.5">• • •</span>
-<button class="w-7 h-7 rounded-full border border-border-light text-slate-500 text-[10px] font-bold flex items-center justify-center hover:bg-slate-50 transition-colors font-display">5</button>
-</div>
-<button class="flex items-center gap-1 text-[10px] font-bold uppercase tracking-widest text-primary hover:text-slate-700 transition-colors font-display">
-                        Next
-                        <span class="material-symbols-outlined text-sm">chevron_right</span>
-</button>
-</div>
+<span id="vault-count" class="text-xs font-medium text-slate-500 font-display"></span>
+<div id="pagination" class="flex items-center gap-4"></div>
 </div>
 </section>
-<footer class="border-t border-border-light pt-12 text-slate-400 text-[10px] font-bold tracking-wide leading-loose uppercase">
-<div class="flex flex-col md:flex-row justify-between gap-10">
-<div class="max-w-xl">
-<p class="mb-4 font-display">OneVault is a private bank investment browser for institutional clients. Historical performance is not indicative of future results. Yields are net of management fees unless otherwise stated. All strategies undergo rigorous 3-tier risk assessment.</p>
-<p class="font-display">© 2024 OneVault Private Banking Group. All rights reserved.</p>
+</main>
+
+<footer class="w-full px-8 py-10 border-t border-[#E5E5E5] mt-12 bg-white">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="text-[11px] text-[#666666] tracking-widests uppercase font-display">
+    © 2024 OneVault Institutional. All rights reserved.
 </div>
-<div class="flex gap-8">
-<a class="hover:text-primary transition-colors font-display" href="#">Risk Disclosure</a>
-<a class="hover:text-primary transition-colors font-display" href="#">Privacy Policy</a>
-<a class="hover:text-primary transition-colors font-display" href="#">Terms of Service</a>
+<div class="flex gap-8 text-[11px] font-bold uppercase tracking-widest font-display">
+<a class="hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-primary transition-colors" href="#">Terms of Service</a>
+<a class="hover:text-primary transition-colors" href="#">Audit Reports</a>
 </div>
 </div>
 </footer>
-</main>
+
+<script src="vaults-data.js"></script>
+<script>
+// ─── Data ──────────────────────────────────────────────────────────────────
+// VAULTS is loaded from vaults-data.js
+
+const FEATURED = [
+  {
+    label: "Institutional Pick",
+    name: "Arc Low Risk",
+    desc: "Stable yield from institutional lending.",
+    apy: "3.5%",
+    icon: "shield",
+    link: "vault_detail.html",
+  },
+  {
+    label: "Institutional Pick",
+    name: "Arc Medium Risk",
+    desc: "Optimized yield from curated DeFi protocols.",
+    apy: "5.5%",
+    icon: "account_balance_wallet",
+    link: "vault_detail.html",
+  },
+  {
+    label: "Institutional Pick",
+    name: "Arc High Risk",
+    desc: "High-performance yield from structured options.",
+    apy: "7.5%",
+    icon: "trending_up",
+    link: "vault_detail.html",
+  },
+];
+
+// VAULTS loaded from vaults-data.js
+
+// ─── State ─────────────────────────────────────────────────────────────────
+
+const PAGE_SIZE = 8;
+let currentPage = 1;
+
+// ─── Helpers ───────────────────────────────────────────────────────────────
+
+function getFilters() {
+  return {
+    asset: document.getElementById("filter-asset").value,
+    apy:   document.getElementById("filter-apy").value,
+    tvl:   document.getElementById("filter-tvl").value,
+    risk:  document.getElementById("filter-risk").value,
+  };
+}
+
+function applyFilters(vaults, f) {
+  return vaults.filter(v => {
+    if (f.asset !== "All Assets" && v.asset !== f.asset) return false;
+
+    if (f.apy === "0% - 5%"   && !(v.apy >= 0  && v.apy < 5))  return false;
+    if (f.apy === "5% - 10%"  && !(v.apy >= 5  && v.apy < 10)) return false;
+    if (f.apy === "10% - 20%" && !(v.apy >= 10 && v.apy < 20)) return false;
+    if (f.apy === "20%+"      && v.apy < 20) return false;
+
+    if (f.tvl === "> $1B"        && v.tvlRaw <= 1_000_000_000) return false;
+    if (f.tvl === "$500M - $1B"  && !(v.tvlRaw >= 500_000_000 && v.tvlRaw <= 1_000_000_000)) return false;
+    if (f.tvl === "$100M - $500M" && !(v.tvlRaw >= 100_000_000 && v.tvlRaw < 500_000_000)) return false;
+
+    if (f.risk === "Low (A/A+)"   && v.riskTier !== "low")    return false;
+    if (f.risk === "Medium (B/B+)" && v.riskTier !== "medium") return false;
+    if (f.risk === "High (C+)"    && v.riskTier !== "high")   return false;
+
+    return true;
+  });
+}
+
+// ─── Render: Featured cards ────────────────────────────────────────────────
+
+function renderFeatured() {
+  document.getElementById("featured-grid").innerHTML = FEATURED.map(f => `
+    <div class="navy-bg text-white p-8 flex flex-col justify-between relative overflow-hidden rounded-lg min-h-[480px]">
+      <div class="z-10">
+        <span class="text-[10px] font-bold uppercase tracking-[0.3em] opacity-70 mb-4 block font-display">${f.label}</span>
+        <h3 class="text-4xl font-bold mb-4 leading-tight tracking-tight text-white font-display">${f.name}</h3>
+        <p class="text-slate-300 text-sm font-normal leading-relaxed mb-8 font-display">${f.desc}</p>
+        <div class="flex gap-8 mb-8">
+          <div>
+            <p class="text-[10px] uppercase tracking-widest opacity-60 mb-1 font-display">Target APY</p>
+            <p class="text-4xl font-bold font-display">${f.apy}</p>
+          </div>
+        </div>
+      </div>
+      <div class="z-10">
+        <button onclick="window.location.href='${f.link}'" class="bg-white text-navy-accent w-full py-3 font-bold uppercase tracking-widest text-xs hover:bg-slate-100 transition-colors font-display">
+          Invest Now
+        </button>
+      </div>
+      <div class="absolute right-[-20%] bottom-[-10%] opacity-10 pointer-events-none">
+        <span class="material-symbols-outlined text-[200px]">${f.icon}</span>
+      </div>
+    </div>
+  `).join("");
+}
+
+// ─── Render: Vault row ─────────────────────────────────────────────────────
+
+function renderVaultRow(v) {
+  return `
+    <div class="grid grid-cols-12 items-center gap-4 px-6 py-8 hover:bg-slate-50 transition-colors cursor-pointer group"
+         onclick="window.location.href='${v.link}'">
+      <div class="col-span-1">
+        <div class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center border border-border-light">
+          ${v.icon}
+        </div>
+      </div>
+      <div class="col-span-4">
+        <p class="text-lg font-bold text-text-main group-hover:underline font-display">${v.name}</p>
+        <p class="text-xs text-slate-500 font-normal font-display">Curated by ${v.curator}</p>
+      </div>
+      <div class="col-span-2 text-right">
+        <p class="text-lg font-bold text-navy-accent font-display">${v.apy.toFixed(2)}%</p>
+      </div>
+      <div class="col-span-2 text-right">
+        <p class="text-sm text-slate-600 font-normal font-display">${v.tvlDisplay}</p>
+      </div>
+      <div class="col-span-2 flex justify-center">
+        <div class="w-8 h-8 rounded-full border border-border-light flex items-center justify-center text-[10px] font-bold text-slate-500 font-display">
+          ${v.risk}
+        </div>
+      </div>
+      <div class="col-span-1 text-right">
+        <span class="material-symbols-outlined text-slate-300 group-hover:text-primary transition-colors">chevron_right</span>
+      </div>
+    </div>
+  `;
+}
+
+// ─── Render: Vault list + pagination ──────────────────────────────────────
+
+function renderVaults() {
+  const filters  = getFilters();
+  const filtered = applyFilters(VAULTS, filters);
+  const total    = filtered.length;
+  const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
+
+  currentPage = Math.min(currentPage, totalPages);
+
+  const slice = filtered.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE);
+
+  document.getElementById("vault-list").innerHTML = slice.length
+    ? slice.map(renderVaultRow).join("")
+    : '<div class="px-6 py-16 text-center text-slate-400 text-sm font-display">No vaults match the selected filters.</div>';
+
+  document.getElementById("vault-count").textContent =
+    `${total} vault${total !== 1 ? "s" : ""} found`;
+
+  renderPagination(totalPages);
+}
+
+// ─── Render: Pagination ────────────────────────────────────────────────────
+
+function renderPagination(totalPages) {
+  const el = document.getElementById("pagination");
+
+  if (totalPages <= 1) {
+    el.innerHTML = "";
+    return;
+  }
+
+  // Build visible page numbers: always show first, last, current ± 1, with ellipsis
+  const pages = new Set([1, totalPages, currentPage, currentPage - 1, currentPage + 1]
+    .filter(p => p >= 1 && p <= totalPages));
+  const sorted = [...pages].sort((a, b) => a - b);
+
+  let pageHtml = "";
+  let prev = null;
+  for (const p of sorted) {
+    if (prev !== null && p - prev > 1) {
+      pageHtml += `<span class="text-slate-300 px-0.5 text-sm">···</span>`;
+    }
+    const active = p === currentPage;
+    pageHtml += `
+      <button onclick="goToPage(${p})"
+        class="w-7 h-7 rounded-full ${active
+          ? "bg-primary text-white"
+          : "border border-border-light text-slate-500 hover:bg-slate-50"
+        } text-[10px] font-bold flex items-center justify-center transition-colors font-display">
+        ${p}
+      </button>`;
+    prev = p;
+  }
+
+  const prevDisabled = currentPage === 1;
+  const nextDisabled = currentPage === totalPages;
+
+  el.innerHTML = `
+    <button onclick="goToPage(${currentPage - 1})" ${prevDisabled ? "disabled" : ""}
+      class="flex items-center gap-1 text-[10px] font-bold uppercase tracking-widest transition-colors font-display
+             ${prevDisabled ? "text-slate-300 cursor-not-allowed" : "text-primary hover:text-slate-700"}">
+      <span class="material-symbols-outlined text-sm">chevron_left</span> Previous
+    </button>
+    <div class="flex items-center gap-1.5">${pageHtml}</div>
+    <button onclick="goToPage(${currentPage + 1})" ${nextDisabled ? "disabled" : ""}
+      class="flex items-center gap-1 text-[10px] font-bold uppercase tracking-widest transition-colors font-display
+             ${nextDisabled ? "text-slate-300 cursor-not-allowed" : "text-primary hover:text-slate-700"}">
+      Next <span class="material-symbols-outlined text-sm">chevron_right</span>
+    </button>
+  `;
+}
+
+function goToPage(page) {
+  const filtered = applyFilters(VAULTS, getFilters());
+  const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+  if (page < 1 || page > totalPages) return;
+  currentPage = page;
+  renderVaults();
+  document.querySelector("main").scrollIntoView({ behavior: "smooth" });
+}
+
+// ─── Init ──────────────────────────────────────────────────────────────────
+
+renderFeatured();
+renderVaults();
+
+["filter-asset", "filter-apy", "filter-tvl", "filter-risk"].forEach(id => {
+  document.getElementById(id).addEventListener("change", () => {
+    currentPage = 1;
+    renderVaults();
+  });
+});
+
+document.getElementById("reset-filters").addEventListener("click", () => {
+  ["filter-asset", "filter-apy", "filter-tvl", "filter-risk"].forEach(id => {
+    document.getElementById(id).selectedIndex = 0;
+  });
+  currentPage = 1;
+  renderVaults();
+});
+</script>
 
 </body></html>

@@ -1,219 +1,241 @@
 <!DOCTYPE html>
-<html class="" lang="en"><head>
+<html lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Smart Yield Terminal | OneVault</title>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    colors: {
-                        "primary": "#000000",
-                        "navy": "#1B2A4A",
-                        "border-gray": "#E5E5E5",
-                        "inactive-gray": "#F2F2F2",
-                        "background-light": "#f7f7f7",
-                        "text-main": "#0D0D0D",
-                        "text-muted": "#666666",
-                    },
-                    fontFamily: {
-                        "display": ["Inter", "sans-serif"],
-                    },
-                    borderRadius: {
-                        "DEFAULT": "0.125rem",
-                        "lg": "0.25rem",
-                        "xl": "0.5rem",
-                        "full": "0.75rem"
-                    },
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+<script src="vaults-data.js"></script>
+<script>
+    tailwind.config = {
+        darkMode: "class",
+        theme: {
+            extend: {
+                colors: {
+                    primary: "#1B2A4A",
+                    "background-light": "#FFFFFF",
+                    "background-dark": "#0D0D0D",
+                    "card-light": "#FFFFFF",
+                    "card-dark": "#121212",
+                    "border-light": "#E5E5E5",
+                    "border-dark": "#262626",
+                    "accent-green": "#22C55E",
+                },
+                fontFamily: {
+                    display: ["Inter", "sans-serif"],
+                    sans: ["Inter", "sans-serif"],
+                },
+                borderRadius: {
+                    DEFAULT: "4px",
+                    lg: "8px",
                 },
             },
-        }
-    </script>
-<style type="text/tailwindcss">
-        @layer base {
-            body {
-                @apply bg-background-light font-display text-text-main antialiased;
-            }
-        }
-        @layer components {
-            input[type=number]::-webkit-inner-spin-button, 
-            input[type=number]::-webkit-outer-spin-button { 
-                -webkit-appearance: none; 
-                margin: 0; 
-            }
-            input[type=number] {
-                -moz-appearance: textfield;
-            }
-            .nav-link {
-                @apply text-sm font-medium text-text-muted hover:text-text-main transition-colors font-display;
-            }
-            #strat-low:checked ~ div button#action-btn::after { content: "Allocate to Arc Low Risk"; }
-            #strat-med:checked ~ div button#action-btn::after { content: "Allocate to Arc Medium Risk"; }
-            #strat-high:checked ~ div button#action-btn::after { content: "Allocate to Arc High Risk"; }
-            #strat-manual:checked ~ div button#action-btn::after { content: "Manual Allocation"; }#strat-low:checked ~ div [for="strat-low"] > div { @apply border-navy ring-1 ring-navy bg-white; }
-            #strat-med:checked ~ div [for="strat-med"] > div { @apply border-navy ring-1 ring-navy bg-white; }
-            #strat-high:checked ~ div [for="strat-high"] > div { @apply border-navy ring-1 ring-navy bg-white; }
-            #strat-manual:checked ~ div [for="strat-manual"] > div { @apply border-navy ring-1 ring-navy bg-white; }
-        }
-    </style>
+        },
+    };
+</script>
+<style>
+    body {
+        font-family: 'Inter', sans-serif;
+    }
+    .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+        vertical-align: middle;
+    }
+</style>
 </head>
-<body class="min-h-screen flex flex-col bg-background-light">
-<header class="w-full border-b border-[#E5E5E5] bg-white sticky top-0 z-50">
+<body class="min-h-screen flex flex-col bg-background-light dark:bg-background-dark text-[#0D0D0D] dark:text-gray-100">
+
+<header class="w-full border-b border-[#E5E5E5] dark:border-border-dark bg-white dark:bg-card-dark sticky top-0 z-50">
 <div class="max-w-[1200px] mx-auto flex items-center justify-between px-6 py-4">
 <div class="flex items-center gap-10">
 <a class="flex items-center gap-2" href="index.html">
 <span class="material-symbols-outlined text-primary text-2xl">account_balance</span>
-<span class="font-bold text-xl tracking-tight font-display">OneVault</span>
+<span class="font-bold text-xl tracking-tight font-display dark:text-white">OneVault</span>
 </a>
 <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
-<a class="text-primary border-b-2 border-primary pb-0.5 font-display" href="allocator.html">Allocate</a>
-<a class="text-slate-500 hover:text-primary transition-colors font-display" href="discover.html">Discover</a>
-<a class="text-slate-500 hover:text-primary transition-colors font-display" href="portfolio_admin_-_main.html">Portfolio</a>
+<a class="text-primary dark:text-white border-b-2 border-primary dark:border-white pb-0.5 font-display" href="allocator.html">Allocate</a>
+<a class="text-slate-500 hover:text-primary dark:hover:text-white transition-colors font-display" href="discover.html">Discover</a>
+<a class="text-slate-500 hover:text-primary dark:hover:text-white transition-colors font-display" href="portfolio_main.html">Portfolio</a>
 </nav>
 </div>
 <div class="flex items-center gap-6">
-<button class="bg-primary text-white text-xs font-bold uppercase tracking-widest px-5 py-2.5 hover:bg-slate-800 transition-colors font-display">
-                Connect Wallet
-            </button>
+<button class="bg-primary text-white text-xs font-bold uppercase tracking-widest px-5 py-2.5 hover:opacity-80 transition-colors font-display">
+    Connect Wallet
+</button>
 </div>
 </div>
 </header>
-<main class="flex-grow flex flex-col items-center pt-20 pb-20 px-4">
-<div class="mb-12 text-center max-w-3xl">
-<div class="inline-block px-3 py-1 border border-border-gray text-[10px] font-bold uppercase tracking-[0.2em] text-text-muted mb-6 font-display bg-white">
-            Private Banking Terminal
-        </div>
-<h1 class="text-5xl md:text-6xl font-display font-bold text-primary tracking-tight mb-6">
-            Best Available Yield: <span class="font-normal opacity-80">18.4% APY</span>
-</h1>
-<p class="text-text-muted text-lg max-w-xl mx-auto leading-relaxed font-display">
-            Automatically allocate to the highest-performing institutional strategies via the OneVault Master Vault.
-        </p>
+
+<main class="flex-grow flex items-center justify-center p-8">
+<div class="w-full max-w-[480px] bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark p-8 md:p-10 shadow-sm">
+<div class="flex border-b border-border-light dark:border-border-dark mb-8">
+<button id="btn-tab-allocate" onclick="setTab('allocate')"
+  class="flex-1 py-3 text-sm font-medium border-b-2 border-primary dark:border-white text-primary dark:text-white transition-colors">
+    Allocate
+</button>
+<button id="btn-tab-remove" onclick="setTab('remove')"
+  class="flex-1 py-3 text-sm font-medium border-b-2 border-transparent text-gray-400 dark:text-gray-600 hover:text-gray-600 dark:hover:text-gray-400 transition-colors">
+    Remove
+</button>
 </div>
-<div class="w-full max-w-[640px] border border-border-gray bg-white p-8 md:p-10 shadow-sm">
-<input checked="" class="sr-only" id="strat-low" name="strategy_mode" type="radio"/>
-<input class="sr-only" id="strat-med" name="strategy_mode" type="radio"/>
-<input class="sr-only" id="strat-high" name="strategy_mode" type="radio"/>
-<input class="sr-only" id="strat-manual" name="strategy_mode" type="radio"/>
-<div class="space-y-8">
-<div class="flex bg-inactive-gray p-1 rounded-sm">
-<label class="flex-1 cursor-pointer">
-<input checked="" class="sr-only peer" name="action_type" type="radio"/>
-<span class="flex items-center justify-center py-2.5 text-xs font-bold uppercase tracking-widest transition-all duration-200 bg-transparent text-text-muted peer-checked:bg-navy peer-checked:text-white font-display">
-                        Allocate
-                    </span>
-</label>
-<label class="flex-1 cursor-pointer">
-<input class="sr-only peer" name="action_type" type="radio"/>
-<span class="flex items-center justify-center py-2.5 text-xs font-bold uppercase tracking-widest transition-all duration-200 bg-transparent text-text-muted peer-checked:bg-navy peer-checked:text-white font-display">
-                        Remove
-                    </span>
-</label>
-</div>
-<div class="space-y-4">
+
+<!-- ── Allocate tab ───────────────────────────────────────── -->
+<div id="tab-allocate" class="space-y-6">
+
+<!-- Allocation Mode toggle -->
 <div class="flex items-center justify-between">
-<label class="text-[11px] font-bold uppercase tracking-widest text-text-muted font-display">Strategy Selection</label>
-<div class="flex items-center gap-1 text-[11px] text-primary cursor-help underline underline-offset-2 font-display">
-                        View Risk Parameters
-                    </div>
+<label class="text-xs font-semibold uppercase tracking-wider text-gray-400 dark:text-gray-500">Allocation Mode</label>
+<div class="flex bg-gray-50 dark:bg-[#1a1a1a] p-1 rounded">
+<button id="btn-auto" onclick="setMode('auto')"
+  class="px-4 py-1 text-xs font-medium rounded transition-all">Auto</button>
+<button id="btn-manual" onclick="setMode('manual')"
+  class="px-4 py-1 text-xs font-medium rounded transition-all">Manual</button>
 </div>
-<div class="space-y-3">
-<div class="grid grid-cols-3 gap-3">
-<label class="relative cursor-pointer group" for="strat-low">
-<div class="flex flex-col items-center justify-center py-6 px-2 border border-border-gray bg-white transition-all duration-200 hover:bg-gray-50 h-full">
-<span class="material-symbols-outlined mb-2 text-primary text-xl opacity-70 group-hover:opacity-100">verified_user</span>
-<span class="text-[11px] font-bold text-primary font-display text-center leading-tight">Arc Low Risk</span>
-<span class="text-[8px] text-text-muted uppercase tracking-tight mt-1 font-display">Optimized</span>
 </div>
-</label>
-<label class="relative cursor-pointer group" for="strat-med">
-<div class="flex flex-col items-center justify-center py-6 px-2 border border-border-gray bg-white transition-all duration-200 hover:bg-gray-50 h-full">
-<span class="material-symbols-outlined mb-2 text-primary text-xl opacity-70 group-hover:opacity-100">shield</span>
-<span class="text-[11px] font-bold text-primary font-display text-center leading-tight">Arc Medium Risk</span>
-<span class="text-[8px] text-text-muted uppercase tracking-tight mt-1 font-display">Optimized</span>
+
+<!-- Auto mode: APY summary + vault tooltip -->
+<div id="section-auto" class="hidden">
+<div class="border border-border-light dark:border-border-dark rounded-lg p-5 space-y-3 bg-gray-50/50 dark:bg-white/[0.02]">
+<div class="flex items-end gap-2">
+<span id="auto-apy" class="text-4xl font-bold text-accent-green"></span>
+<div class="mb-1 space-y-0.5">
+<p class="text-[10px] font-semibold uppercase tracking-widest text-gray-400 dark:text-gray-500 leading-none">APY</p>
+<p class="text-[11px] text-gray-400 dark:text-gray-500 flex items-center gap-1">
+  On USDC deposits
+  <img alt="USDC" class="w-3 h-3 grayscale opacity-60" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCKot8_D-kw8PYhfLQhw5pVPGnYQSSG2S_tLQQe-JrbKCAcg5ph5B3ejObcjk442i7KkwJ2ph8k7AdqqY0H-A7P4nVfSmHuAnUy6H9gpM4_cvuRg4QSPtv0MGRbUHAgWpyim0IHz8P9J8jzzS70XE8OOz1h90B42OagVVjDl7kQgNSudZBZudCoDkUJ-5C6-O7UVHnVsCfFwAzRa2NH0z--reejrwmWIK_oN0G3zjghtAaJwU2pMW2cXJzQyHJai_fWHYEKI_HBG-g"/>
+</p>
 </div>
-</label>
-<label class="relative cursor-pointer group" for="strat-high">
-<div class="flex flex-col items-center justify-center py-6 px-2 border border-border-gray bg-white transition-all duration-200 hover:bg-gray-50 h-full">
-<span class="material-symbols-outlined mb-2 text-primary text-xl opacity-70 group-hover:opacity-100">rocket_launch</span>
-<span class="text-[11px] font-bold text-primary font-display text-center leading-tight">Arc High Risk</span>
-<span class="text-[8px] text-text-muted uppercase tracking-tight mt-1 font-display">Optimized</span>
 </div>
-</label>
+<!-- Vault tooltip -->
+<div id="auto-vault-info" class="flex items-center justify-between pt-3 border-t border-border-light dark:border-border-dark">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-accent-green text-base">auto_awesome</span>
+<div>
+<p id="auto-vault-name" class="text-xs font-semibold"></p>
+<p id="auto-vault-meta" class="text-[10px] text-gray-400 dark:text-gray-500"></p>
 </div>
-<label class="relative cursor-pointer group block" for="strat-manual" onclick="window.location.href='discover.html'">
-<div class="flex items-center justify-center py-4 px-6 border border-border-gray bg-white transition-all duration-200 hover:bg-gray-50">
-<div class="flex items-center gap-3">
-<span class="material-symbols-outlined text-primary text-xl opacity-70 group-hover:opacity-100">tune</span>
-<div class="flex flex-col">
-<span class="text-[12px] font-bold text-primary font-display leading-none">Manual Selection</span>
-<span class="text-[9px] text-text-muted uppercase tracking-widest mt-0.5 font-display">Self-Managed Allocation</span>
+</div>
+<span class="text-[10px] font-bold uppercase tracking-widest text-gray-300 dark:text-gray-600">Best Pick</span>
 </div>
 </div>
 </div>
-</label>
+
+<!-- Manual mode: vault dropdown -->
+<div id="section-manual" class="hidden space-y-2">
+<div class="relative" id="vault-selector-wrapper">
+<div id="vault-selector-card"
+  onclick="toggleDropdown()"
+  class="cursor-pointer border border-border-light dark:border-border-dark p-4 rounded-lg hover:border-gray-400 dark:hover:border-gray-600 transition-all select-none">
+</div>
+<div id="vault-dropdown"
+  class="hidden absolute top-full left-0 right-0 z-20 mt-1 border border-border-light dark:border-border-dark bg-white dark:bg-card-dark rounded-lg shadow-lg overflow-hidden">
+<div class="max-h-64 overflow-y-auto divide-y divide-border-light dark:divide-border-dark" id="vault-dropdown-list"></div>
 </div>
 </div>
-<div class="space-y-4">
-<div class="flex items-center justify-between">
-<label class="text-[11px] font-bold uppercase tracking-widest text-text-muted font-display">Amount</label>
-<div class="flex items-center gap-2 text-[11px] font-display">
-<span class="text-text-muted">Balance:</span>
-<span class="text-primary font-semibold">4,250.00 USDC</span>
+<a href="discover.html"
+  class="flex items-center justify-end gap-1 text-[11px] font-semibold text-primary dark:text-white/60 hover:text-primary dark:hover:text-white transition-colors pr-1">
+  Discover More Vaults
+  <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+
+<!-- Amount input -->
+<div class="space-y-2">
+<div class="flex justify-between">
+<label class="text-xs font-semibold uppercase tracking-wider text-gray-400 dark:text-gray-500">Amount</label>
+<div class="flex items-center gap-1.5">
+<img alt="USDC" class="w-3.5 h-3.5" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAP1R2mXvfdAM4XtNoPhDrD2ZovjemD1kqxfJvCCIdyvvEDK3zFu8QhedvKveiPT3-Q8Ait7DuLZ4qfafT8AHBUnk5w6MJ1XQYxhr9kKL2EyVTqiK_jXJfPcwMeCdpkWDw7UlcKhQh1i8TFJQ2d88u6pS-Jeqdj-nrYhZNRlmdP2Z0tPcIZwE49dt-Mut-AVhbVoftPNnTmJMlJaf704mkOlLG0ABwiwAFKRi66Urvnk31gNe-CQAo3swrNQUquySjGxx0Z9I5VHvc"/>
+<span class="text-xs font-medium text-gray-600 dark:text-gray-400">USDC</span>
 </div>
 </div>
 <div class="relative">
-<input class="w-full bg-white text-3xl font-display font-medium border border-border-gray py-5 px-6 focus:ring-1 focus:ring-navy focus:border-navy outline-none transition-all placeholder:text-border-gray" placeholder="0.00" type="number"/>
-<div class="absolute right-6 top-1/2 -translate-y-1/2 flex items-center gap-3">
-<button class="text-[10px] font-bold uppercase text-navy border-b border-navy tracking-widest font-display">Max</button>
-<div class="h-6 w-px bg-border-gray"></div>
-<span class="text-sm font-bold text-primary font-display">USDC</span>
-</div>
-</div>
-</div>
-<div class="pt-2">
-<button class="w-full py-5 bg-navy text-white font-bold text-xs uppercase tracking-[0.2em] transition-all hover:bg-black active:scale-[0.98] font-display" id="action-btn">
+<input id="amount-input" class="w-full bg-transparent border border-border-light dark:border-border-dark p-4 pr-24 rounded-lg focus:ring-1 focus:ring-primary dark:focus:ring-white focus:border-primary dark:focus:border-white outline-none text-xl font-medium transition-all" placeholder="0.0" type="text"/>
+<button onclick="document.getElementById('amount-input').value='808.67'"
+  class="absolute right-3 top-1/2 -translate-y-1/2 text-[11px] font-bold uppercase tracking-widest text-primary dark:text-white border border-border-light dark:border-border-dark px-3 py-1.5 rounded hover:bg-gray-50 dark:hover:bg-white/5 transition-colors">
+    Use Max
 </button>
 </div>
-<div class="pt-6 border-t border-border-gray grid grid-cols-2 gap-4">
-<div class="flex flex-col">
-<span class="text-[9px] font-bold uppercase tracking-widest text-text-muted font-display">Vault Assets (TVL)</span>
-<span class="text-primary font-semibold text-sm font-display">$24,500,000.00</span>
-</div>
-<div class="flex flex-col text-right">
-<span class="text-[9px] font-bold uppercase tracking-widest text-text-muted font-display">Yield Engine</span>
-<span class="text-primary font-semibold text-sm uppercase font-display">Institutional</span>
+<div class="flex justify-between text-[11px] text-gray-400 dark:text-gray-500 px-1">
+<span>Available: 808.67 USDC</span>
+<span>Balance: 10.01 USDC</span>
 </div>
 </div>
+
+<div class="flex items-center justify-between py-2">
+<span class="text-xs font-medium text-gray-400 dark:text-gray-500">Network</span>
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-blue-600"></div>
+<span class="text-xs font-semibold">Base</span>
 </div>
 </div>
-<div class="mt-20 flex flex-col items-center gap-8">
-<span class="text-[9px] uppercase tracking-[0.3em] text-text-muted font-bold font-display">Supported Institutional Liquidity</span>
-<div class="flex flex-wrap gap-12 items-center justify-center opacity-40 grayscale">
-<div class="flex items-center gap-2 font-bold tracking-tighter text-xl font-display">
-<span class="material-symbols-outlined text-[20px]">account_balance</span> LIQUID
-            </div>
-<div class="flex items-center gap-2 font-bold tracking-tighter text-xl font-display">
-<span class="material-symbols-outlined text-[20px]">shield_with_heart</span> SECURE
-            </div>
-<div class="flex items-center gap-2 font-bold tracking-tighter text-xl font-display">
-<span class="material-symbols-outlined text-[20px]">bolt</span> FAST
-            </div>
-<div class="flex items-center gap-2 font-bold tracking-tighter text-xl font-display">
-<span class="material-symbols-outlined text-[20px]">monitoring</span> ANALYTIC
-            </div>
+
+<button class="w-full bg-primary dark:bg-white text-white dark:text-black py-4 font-bold uppercase tracking-[0.2em] text-sm hover:opacity-90 transition-opacity active:scale-[0.98]">
+    Allocate Funds
+</button>
+</div><!-- /tab-allocate -->
+
+<!-- ── Remove tab ────────────────────────────────────────── -->
+<div id="tab-remove" class="hidden space-y-6">
+
+<!-- Vault selector (manual only) -->
+<div class="relative" id="remove-vault-wrapper">
+<div id="remove-vault-card"
+  onclick="toggleRemoveDropdown()"
+  class="cursor-pointer border border-border-light dark:border-border-dark p-4 rounded-lg hover:border-gray-400 dark:hover:border-gray-600 transition-all select-none">
 </div>
+<div id="remove-vault-dropdown"
+  class="hidden absolute top-full left-0 right-0 z-20 mt-1 border border-border-light dark:border-border-dark bg-white dark:bg-card-dark rounded-lg shadow-lg overflow-hidden">
+<div class="max-h-64 overflow-y-auto divide-y divide-border-light dark:divide-border-dark" id="remove-vault-dropdown-list"></div>
+</div>
+</div>
+
+
+<!-- Amount to withdraw -->
+<div class="space-y-2">
+<div class="flex justify-between">
+<label class="text-xs font-semibold uppercase tracking-wider text-gray-400 dark:text-gray-500">Amount</label>
+<div class="flex items-center gap-1.5">
+<img alt="USDC" class="w-3.5 h-3.5" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAP1R2mXvfdAM4XtNoPhDrD2ZovjemD1kqxfJvCCIdyvvEDK3zFu8QhedvKveiPT3-Q8Ait7DuLZ4qfafT8AHBUnk5w6MJ1XQYxhr9kKL2EyVTqiK_jXJfPcwMeCdpkWDw7UlcKhQh1i8TFJQ2d88u6pS-Jeqdj-nrYhZNRlmdP2Z0tPcIZwE49dt-Mut-AVhbVoftPNnTmJMlJaf704mkOlLG0ABwiwAFKRi66Urvnk31gNe-CQAo3swrNQUquySjGxx0Z9I5VHvc"/>
+<span class="text-xs font-medium text-gray-600 dark:text-gray-400">USDC</span>
+</div>
+</div>
+<div class="relative">
+<input id="remove-amount-input" class="w-full bg-transparent border border-border-light dark:border-border-dark p-4 pr-24 rounded-lg focus:ring-1 focus:ring-primary dark:focus:ring-white focus:border-primary dark:focus:border-white outline-none text-xl font-medium transition-all" placeholder="0.0" type="text"/>
+<button onclick="document.getElementById('remove-amount-input').value=selectedRemoveVault.balance.toFixed(2)"
+  class="absolute right-3 top-1/2 -translate-y-1/2 text-[11px] font-bold uppercase tracking-widest text-primary dark:text-white border border-border-light dark:border-border-dark px-3 py-1.5 rounded hover:bg-gray-50 dark:hover:bg-white/5 transition-colors">
+    Use Max
+</button>
+</div>
+<div class="flex justify-between text-[11px] text-gray-400 dark:text-gray-500 px-1">
+<span id="remove-deposited-label">Deposited: 0.00 USDC</span>
+<span>Wallet: 808.67 USDC</span>
+</div>
+</div>
+
+<div class="flex items-center justify-between py-2">
+<span class="text-xs font-medium text-gray-400 dark:text-gray-500">Network</span>
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-blue-600"></div>
+<span class="text-xs font-semibold">Base</span>
+</div>
+</div>
+
+<button class="w-full bg-primary dark:bg-white text-white dark:text-black py-4 font-bold uppercase tracking-[0.2em] text-sm hover:opacity-90 transition-opacity active:scale-[0.98]">
+    Remove Funds
+</button>
+</div><!-- /tab-remove -->
+
 </div>
 </main>
-<footer class="w-full px-8 py-10 border-t border-border-gray mt-12 bg-white">
+
+<footer class="w-full px-8 py-10 border-t border-[#E5E5E5] dark:border-border-dark bg-white dark:bg-card-dark">
 <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-<div class="text-[11px] text-text-muted tracking-widest uppercase font-display">
-            © 2024 OneVault Institutional. All rights reserved.
-        </div>
+<div class="text-[11px] text-[#666666] tracking-widest uppercase font-display">
+    © 2024 OneVault Institutional. All rights reserved.
+</div>
 <div class="flex gap-8 text-[11px] font-bold uppercase tracking-widest font-display">
 <a class="hover:text-primary transition-colors" href="#">Privacy Policy</a>
 <a class="hover:text-primary transition-colors" href="#">Terms of Service</a>
@@ -221,5 +243,260 @@
 </div>
 </div>
 </footer>
+
+<button class="fixed bottom-6 right-6 p-3 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 shadow-lg hover:scale-110 transition-all" onclick="document.documentElement.classList.toggle('dark')">
+<span class="material-symbols-outlined dark:hidden">dark_mode</span>
+<span class="material-symbols-outlined hidden dark:block">light_mode</span>
+</button>
+
+<script>
+// ─── State ──────────────────────────────────────────────────────────────
+let mode = "auto";          // "auto" | "manual"
+let currentTab = "allocate"; // "allocate" | "remove"
+let selectedVault = null;
+let selectedRemoveVault = null;
+let dropdownOpen = false;
+let removeDropdownOpen = false;
+
+// Best vault = highest APY in shared VAULTS list
+const bestVault = VAULTS.reduce((a, b) => (a.apy > b.apy ? a : b));
+
+// ─── Tab switching ───────────────────────────────────────────────────────
+function setTab(tab) {
+  currentTab = tab;
+  const isAllocate = tab === "allocate";
+
+  const tabA = document.getElementById("btn-tab-allocate");
+  const tabR = document.getElementById("btn-tab-remove");
+
+  tabA.className = `flex-1 py-3 text-sm font-medium border-b-2 transition-colors ${
+    isAllocate
+      ? "border-primary dark:border-white text-primary dark:text-white"
+      : "border-transparent text-gray-400 dark:text-gray-600 hover:text-gray-600 dark:hover:text-gray-400"
+  }`;
+  tabR.className = `flex-1 py-3 text-sm font-medium border-b-2 transition-colors ${
+    !isAllocate
+      ? "border-primary dark:border-white text-primary dark:text-white"
+      : "border-transparent text-gray-400 dark:text-gray-600 hover:text-gray-600 dark:hover:text-gray-400"
+  }`;
+
+  document.getElementById("tab-allocate").classList.toggle("hidden", !isAllocate);
+  document.getElementById("tab-remove").classList.toggle("hidden", isAllocate);
+}
+
+// ─── Mode toggle ─────────────────────────────────────────────────────────
+function setMode(m) {
+  mode = m;
+
+  const btnAuto   = document.getElementById("btn-auto");
+  const btnManual = document.getElementById("btn-manual");
+  const secAuto   = document.getElementById("section-auto");
+  const secManual = document.getElementById("section-manual");
+
+  const activeClass   = ["bg-white", "dark:bg-border-dark", "text-primary", "dark:text-white", "shadow-sm"];
+  const inactiveClass = ["text-gray-400", "dark:text-gray-600"];
+
+  if (m === "auto") {
+    btnAuto.classList.add(...activeClass);
+    btnAuto.classList.remove(...inactiveClass);
+    btnManual.classList.remove(...activeClass);
+    btnManual.classList.add(...inactiveClass);
+    secAuto.classList.remove("hidden");
+    secManual.classList.add("hidden");
+  } else {
+    btnManual.classList.add(...activeClass);
+    btnManual.classList.remove(...inactiveClass);
+    btnAuto.classList.remove(...activeClass);
+    btnAuto.classList.add(...inactiveClass);
+    secManual.classList.remove("hidden");
+    secAuto.classList.add("hidden");
+  }
+}
+
+// ─── Auto mode ───────────────────────────────────────────────────────────
+function renderAutoMode() {
+  document.getElementById("auto-apy").textContent       = bestVault.apy.toFixed(2) + "%";
+  document.getElementById("auto-vault-name").textContent = bestVault.name;
+  document.getElementById("auto-vault-meta").textContent =
+    `${bestVault.curator} · ${bestVault.tvlDisplay} TVL`;
+}
+
+// ─── Manual mode: vault card ─────────────────────────────────────────────
+function renderVaultCard() {
+  const v = selectedVault;
+  document.getElementById("vault-selector-card").innerHTML = `
+    <div class="flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-full bg-accent-green/10 dark:bg-accent-green/5 flex items-center justify-center shrink-0">
+          ${v.icon}
+        </div>
+        <div>
+          <p class="text-sm font-semibold">${v.name}</p>
+          <p class="text-[11px] text-gray-400 dark:text-gray-500">${v.curator} · ${v.tvlDisplay} TVL</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-3 shrink-0">
+        <span class="text-sm font-bold text-accent-green">${v.apy.toFixed(2)}%</span>
+        <span class="material-symbols-outlined text-gray-400 transition-transform duration-200" id="dropdown-chevron">
+          expand_more
+        </span>
+      </div>
+    </div>
+  `;
+}
+
+// ─── Manual mode: dropdown list ──────────────────────────────────────────
+function renderDropdownList() {
+  document.getElementById("vault-dropdown-list").innerHTML = VAULTS.map((v, i) => `
+    <div data-idx="${i}"
+      class="flex items-center justify-between px-4 py-3 cursor-pointer hover:bg-gray-50 dark:hover:bg-white/5 transition-colors
+             ${v.name === selectedVault.name ? "bg-gray-50 dark:bg-white/[0.04]" : ""}">
+      <div class="flex items-center gap-3">
+        <div class="w-7 h-7 rounded-full bg-slate-100 dark:bg-white/10 flex items-center justify-center shrink-0">
+          ${v.icon}
+        </div>
+        <div>
+          <p class="text-sm font-medium">${v.name}</p>
+          <p class="text-[10px] text-gray-400 dark:text-gray-500">${v.curator} · ${v.tvlDisplay}</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-2 shrink-0">
+        <span class="text-sm font-bold text-accent-green">${v.apy.toFixed(2)}%</span>
+        ${v.name === selectedVault.name
+          ? '<span class="material-symbols-outlined text-accent-green text-base">check</span>'
+          : ""}
+      </div>
+    </div>
+  `).join("");
+
+  // Event delegation
+  document.getElementById("vault-dropdown-list").onclick = e => {
+    const item = e.target.closest("[data-idx]");
+    if (!item) return;
+    selectedVault = VAULTS[parseInt(item.dataset.idx)];
+    renderVaultCard();
+    renderDropdownList();
+    closeDropdown();
+  };
+}
+
+// ─── Dropdown open/close ─────────────────────────────────────────────────
+function toggleDropdown() {
+  dropdownOpen ? closeDropdown() : openDropdown();
+}
+
+function openDropdown() {
+  dropdownOpen = true;
+  document.getElementById("vault-dropdown").classList.remove("hidden");
+  const chevron = document.getElementById("dropdown-chevron");
+  if (chevron) chevron.style.transform = "rotate(180deg)";
+}
+
+function closeDropdown() {
+  dropdownOpen = false;
+  document.getElementById("vault-dropdown").classList.add("hidden");
+  const chevron = document.getElementById("dropdown-chevron");
+  if (chevron) chevron.style.transform = "";
+}
+
+document.addEventListener("click", e => {
+  const wrapper = document.getElementById("vault-selector-wrapper");
+  if (wrapper && !wrapper.contains(e.target)) closeDropdown();
+
+  const removeWrapper = document.getElementById("remove-vault-wrapper");
+  if (removeWrapper && !removeWrapper.contains(e.target)) closeRemoveDropdown();
+});
+
+// ─── Remove tab: vault card ───────────────────────────────────────────────
+function renderRemoveVaultCard() {
+  const v = selectedRemoveVault;
+  document.getElementById("remove-vault-card").innerHTML = `
+    <div class="flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-full bg-slate-100 dark:bg-white/10 flex items-center justify-center shrink-0">
+          ${v.icon}
+        </div>
+        <div>
+          <p class="text-sm font-semibold">${v.name}</p>
+          <p class="text-[11px] text-gray-400 dark:text-gray-500">${v.curator} · ${v.tvlDisplay} TVL</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-3 shrink-0">
+        <span class="text-sm font-bold text-accent-green">${(v.balance || 0).toFixed(2)} USDC</span>
+        <span class="material-symbols-outlined text-gray-400 transition-transform duration-200" id="remove-chevron">
+          expand_more
+        </span>
+      </div>
+    </div>
+  `;
+  // Update deposited label below amount input
+  const bal = (v.balance || 0).toFixed(2);
+  document.getElementById("remove-deposited-label").textContent = "Deposited: " + bal + " USDC";
+}
+
+function renderRemoveDropdownList() {
+  const depositedVaults = VAULTS.filter(v => v.balance > 0);
+  document.getElementById("remove-vault-dropdown-list").innerHTML = depositedVaults.map((v) => {
+    const origIdx = VAULTS.indexOf(v);
+    return `
+    <div data-ridx="${origIdx}"
+      class="flex items-center justify-between px-4 py-3 cursor-pointer hover:bg-gray-50 dark:hover:bg-white/5 transition-colors
+             ${v.name === selectedRemoveVault.name ? "bg-gray-50 dark:bg-white/[0.04]" : ""}">
+      <div class="flex items-center gap-3">
+        <div class="w-7 h-7 rounded-full bg-slate-100 dark:bg-white/10 flex items-center justify-center shrink-0">
+          ${v.icon}
+        </div>
+        <div>
+          <p class="text-sm font-medium">${v.name}</p>
+          <p class="text-[10px] text-gray-400 dark:text-gray-500">${v.curator} · ${v.tvlDisplay}</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-2 shrink-0">
+        <span class="text-sm font-bold text-accent-green">${v.balance.toFixed(2)} USDC</span>
+        ${v.name === selectedRemoveVault.name
+          ? '<span class="material-symbols-outlined text-accent-green text-base">check</span>'
+          : ""}
+      </div>
+    </div>
+  `}).join("");
+
+  document.getElementById("remove-vault-dropdown-list").onclick = e => {
+    const item = e.target.closest("[data-ridx]");
+    if (!item) return;
+    selectedRemoveVault = VAULTS[parseInt(item.dataset.ridx)];
+    renderRemoveVaultCard();
+    renderRemoveDropdownList();
+    closeRemoveDropdown();
+  };
+}
+
+function toggleRemoveDropdown() {
+  removeDropdownOpen ? closeRemoveDropdown() : openRemoveDropdown();
+}
+function openRemoveDropdown() {
+  removeDropdownOpen = true;
+  document.getElementById("remove-vault-dropdown").classList.remove("hidden");
+  const chevron = document.getElementById("remove-chevron");
+  if (chevron) chevron.style.transform = "rotate(180deg)";
+}
+function closeRemoveDropdown() {
+  removeDropdownOpen = false;
+  document.getElementById("remove-vault-dropdown").classList.add("hidden");
+  const chevron = document.getElementById("remove-chevron");
+  if (chevron) chevron.style.transform = "";
+}
+
+// ─── Init ────────────────────────────────────────────────────────────────
+selectedVault       = VAULTS.find(v => v.name === "Gauntlet USDC Frontier") || VAULTS[0];
+selectedRemoveVault = VAULTS.find(v => v.balance > 0) || VAULTS[0];
+
+renderAutoMode();
+renderVaultCard();
+renderDropdownList();
+renderRemoveVaultCard();
+renderRemoveDropdownList();
+setMode("auto");
+setTab("allocate");
+</script>
 
 </body></html>

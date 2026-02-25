@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html class="" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>OneVault | Settings</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0D0D0D",
+                        "navy": "#1B2A4A",
+                        "border-gray": "#E5E5E5",
+                        "background-light": "#FFFFFF",
+                        "slate-gray": "#64748B",
+                    },
+                    fontFamily: {
+                        "sans": ["Inter", "sans-serif"],
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0px",
+                        "lg": "0px",
+                        "xl": "0px",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        @layer base {
+            body {
+                @apply font-sans text-primary bg-background-light antialiased;
+            }
+            h1, h2, h3, h4 {
+                @apply font-bold tracking-tight;
+            }
+        }
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FFFFFF;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #E5E5E5;
+        }
+        .sidebar-link {
+            @apply flex items-center gap-3 px-8 py-3 text-slate-gray hover:text-primary transition-all duration-200 text-sm font-medium border-r-2 border-transparent;
+        }
+        .sidebar-link.active {
+            @apply text-primary bg-gray-50 border-r-2 border-navy;
+        }
+        .nav-active {
+            @apply border-l-2 border-navy font-semibold text-primary;
+        }
+        .nav-inactive {
+            @apply border-l-2 border-transparent text-slate-gray hover:text-primary transition-colors;
+        }
+        input[type="text"], input[type="email"], select {
+            @apply border border-border-gray bg-white px-3 py-2 text-sm focus:ring-0 focus:border-primary transition-colors outline-none;
+        }
+        .simple-toggle:checked + div {
+            @apply bg-navy;
+        }
+        .simple-toggle:checked + div > div {
+            @apply translate-x-4;
+        }
+    </style>
+</head>
+<body class="overflow-hidden flex flex-col h-screen">
+<header class="w-full border-b border-[#E5E5E5] bg-white shrink-0 z-50">
+<div class="max-w-[1200px] mx-auto flex items-center justify-between px-6 py-4">
+<div class="flex items-center gap-10">
+<a class="flex items-center gap-2" href="index.html">
+<span class="material-symbols-outlined text-primary text-2xl">account_balance</span>
+<span class="font-bold text-xl tracking-tight font-display">OneVault</span>
+</a>
+<nav class="hidden md:flex items-center gap-8 text-sm font-medium">
+<a class="text-slate-500 hover:text-primary transition-colors font-display" href="allocator.html">Allocate</a>
+<a class="text-slate-500 hover:text-primary transition-colors font-display" href="discover.html">Discover</a>
+<a class="text-primary border-b-2 border-primary pb-0.5 font-display" href="portfolio_main.html">Portfolio</a>
+</nav>
+</div>
+<div class="flex items-center gap-6">
+<button class="bg-primary text-white text-xs font-bold uppercase tracking-widest px-5 py-2.5 hover:bg-slate-800 transition-colors font-display">
+                Connect Wallet
+            </button>
+</div>
+</div>
+</header>
+<div class="flex flex-1 w-full flex-row overflow-hidden">
+<aside class="hidden lg:flex w-64 flex-col border-r border-border-gray bg-white h-full shrink-0">
+<div class="flex h-full flex-col justify-between py-10">
+<div class="flex flex-col gap-12">
+<nav class="flex flex-col">
+<a class="sidebar-link" href="portfolio_main.html">
+<span class="material-symbols-outlined text-[20px]">grid_view</span>
+<span>Portfolio</span>
+</a>
+<a class="sidebar-link" href="portfolio_txs.html">
+<span class="material-symbols-outlined text-[20px]">history</span>
+<span>Activity</span>
+</a>
+<a class="sidebar-link active" href="#">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+<span>Settings</span>
+</a>
+</nav>
+</div>
+</div>
+</aside>
+<main class="flex-1 flex flex-col h-full overflow-hidden bg-white">
+<div class="flex-1 overflow-y-auto p-8 md:p-12">
+<div class="max-w-4xl mx-auto">
+<div class="mb-20">
+<h1 class="text-2xl font-light tracking-tight text-primary mb-2">Account Settings</h1>
+<p class="text-slate-gray text-sm">Personal preferences and security configurations for your private terminal.</p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
+<div class="hidden lg:block lg:col-span-3">
+<nav class="sticky top-0 flex flex-col space-y-6">
+<a class="pl-4 py-1 text-sm nav-active" href="#profile">Profile</a>
+<a class="pl-4 py-1 text-sm nav-inactive" href="#security">Security</a>
+<a class="pl-4 py-1 text-sm nav-inactive" href="#notifications">Alerts</a>
+<a class="pl-4 py-1 text-sm nav-inactive" href="#interface">Interface</a>
+</nav>
+</div>
+<div class="lg:col-span-9 flex flex-col">
+<section class="pb-20 mb-20 border-b border-border-gray" id="profile">
+<h2 class="text-xs font-bold uppercase tracking-[0.2em] mb-12">Profile Details</h2>
+<div class="space-y-12">
+<div class="flex items-center gap-8">
+<div class="size-20 bg-gray-100 flex items-center justify-center border border-border-gray">
+<span class="material-symbols-outlined text-gray-300 scale-150">person</span>
+</div>
+<div class="flex flex-col gap-2">
+<span class="text-[10px] font-bold text-slate-gray uppercase tracking-wider">Identity Status</span>
+<div class="flex items-center gap-2">
+<span class="text-xs font-medium">Verified Account</span>
+<div class="size-1 bg-primary rounded-full"></div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-10">
+<div class="flex flex-col gap-2">
+<label class="text-[10px] font-bold text-slate-gray uppercase tracking-wider">Display Name</label>
+<input class="w-full" type="text" value="Alex Morgan"/>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-[10px] font-bold text-slate-gray uppercase tracking-wider">Email Address</label>
+<input class="w-full" type="email" value="alex.morgan@onevault.fi"/>
+</div>
+<div class="flex flex-col gap-2 md:col-span-2">
+<label class="text-[10px] font-bold text-slate-gray uppercase tracking-wider">Wallet Address</label>
+<div class="flex gap-2">
+<input class="w-full bg-gray-50 font-mono text-xs" readonly="" type="text" value="0x71C...9A23"/>
+<button class="px-4 border border-border-gray hover:bg-gray-50 transition-colors">
+<span class="material-symbols-outlined text-sm">content_copy</span>
+</button>
+</div>
+</div>
+</div>
+<div class="flex justify-start">
+<button class="bg-navy text-white text-[11px] font-bold uppercase tracking-widest px-8 py-3 hover:bg-primary transition-colors">
+                                            Save Changes
+                                        </button>
+</div>
+</div>
+</section>
+<section class="pb-20 mb-20 border-b border-border-gray" id="security">
+<h2 class="text-xs font-bold uppercase tracking-[0.2em] mb-12">Security &amp; Access</h2>
+<div class="space-y-12">
+<div class="flex justify-between items-start">
+<div class="max-w-md">
+<h3 class="text-sm font-medium mb-1">Two-Factor Authentication</h3>
+<p class="text-xs text-slate-gray">Add an extra layer of protection to your account by requiring a code from your mobile device.</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only simple-toggle" type="checkbox"/>
+<div class="w-9 h-5 bg-gray-200 transition-colors">
+<div class="absolute left-0.5 top-0.5 bg-white w-4 h-4 transition-transform"></div>
+</div>
+</label>
+</div>
+<div>
+<h3 class="text-xs font-bold uppercase tracking-wider mb-6 text-slate-gray">Active Sessions</h3>
+<div class="space-y-px bg-border-gray border border-border-gray">
+<div class="flex items-center justify-between p-5 bg-white">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-slate-gray">desktop_windows</span>
+<div>
+<p class="text-xs font-medium">Chrome on macOS</p>
+<p class="text-[10px] text-slate-gray">San Francisco, US • 10.234.12.1</p>
+</div>
+</div>
+<span class="text-[10px] font-bold uppercase text-slate-gray">Current</span>
+</div>
+<div class="flex items-center justify-between p-5 bg-white">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-slate-gray">smartphone</span>
+<div>
+<p class="text-xs font-medium">Mobile Application</p>
+<p class="text-[10px] text-slate-gray">Last active: 2 hours ago</p>
+</div>
+</div>
+<button class="text-primary text-[10px] font-bold uppercase tracking-wider px-4 py-2 border border-border-gray hover:bg-gray-50 transition-colors">
+                                                    Revoke
+                                                </button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="pb-20" id="interface">
+<h2 class="text-xs font-bold uppercase tracking-[0.2em] mb-12">Interface</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+<div class="flex flex-col gap-4">
+<label class="text-[10px] font-bold text-slate-gray uppercase tracking-wider">Base Currency</label>
+<select class="w-full">
+<option>USD - US Dollar</option>
+<option>EUR - Euro</option>
+<option>BTC - Bitcoin</option>
+</select>
+</div>
+<div class="flex flex-col gap-4">
+<label class="text-[10px] font-bold text-slate-gray uppercase tracking-wider">Theme Mode</label>
+<div class="flex border border-border-gray">
+<button class="flex-1 py-2 text-[10px] font-bold uppercase bg-primary text-white">Light</button>
+<button class="flex-1 py-2 text-[10px] font-bold uppercase hover:bg-gray-50 text-slate-gray">Dark</button>
+<button class="flex-1 py-2 text-[10px] font-bold uppercase hover:bg-gray-50 text-slate-gray">System</button>
+</div>
+</div>
+</div>
+<div class="mt-12 pt-8 border-t border-border-gray flex justify-between items-center">
+<div>
+<p class="text-xs font-medium">Developer Mode</p>
+<p class="text-[10px] text-slate-gray">Display advanced transaction logs and metadata.</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only simple-toggle" type="checkbox"/>
+<div class="w-9 h-5 bg-gray-200 transition-colors">
+<div class="absolute left-0.5 top-0.5 bg-white w-4 h-4 transition-transform"></div>
+</div>
+</label>
+</div>
+</section>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+
+</body></html>
