@@ -328,62 +328,6 @@
 <!-- ── Allocate tab ───────────────────────────────────────── -->
 <div id="tab-allocate" class="space-y-6">
 
-<!-- Allocation Mode toggle -->
-<div class="flex items-center justify-between">
-<label class="text-xs font-semibold uppercase tracking-wider text-gray-400">Allocation Mode</label>
-<div class="flex bg-gray-50 p-1 rounded">
-<button id="btn-auto" onclick="setMode('auto')"
-  class="px-4 py-1 text-xs font-medium rounded transition-all">Auto</button>
-<button id="btn-manual" onclick="setMode('manual')"
-  class="px-4 py-1 text-xs font-medium rounded transition-all">Manual</button>
-</div>
-</div>
-
-<!-- Auto mode: APY summary + vault tooltip -->
-<div id="section-auto" class="hidden">
-<div class="border border-border-light rounded-lg p-5 space-y-3 bg-gray-50/50">
-<div class="flex items-end gap-2">
-<span id="auto-apy" class="text-4xl font-bold text-accent-green"></span>
-<div class="mb-1 space-y-0.5">
-<p class="text-[10px] font-semibold uppercase tracking-widest text-gray-400 leading-none">APY</p>
-<p class="text-[11px] text-gray-400 flex items-center gap-1">
-  On USDC deposits
-  <img alt="USDC" class="w-3 h-3 grayscale opacity-60" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCKot8_D-kw8PYhfLQhw5pVPGnYQSSG2S_tLQQe-JrbKCAcg5ph5B3ejObcjk442i7KkwJ2ph8k7AdqqY0H-A7P4nVfSmHuAnUy6H9gpM4_cvuRg4QSPtv0MGRbUHAgWpyim0IHz8P9J8jzzS70XE8OOz1h90B42OagVVjDl7kQgNSudZBZudCoDkUJ-5C6-O7UVHnVsCfFwAzRa2NH0z--reejrwmWIK_oN0G3zjghtAaJwU2pMW2cXJzQyHJai_fWHYEKI_HBG-g"/>
-</p>
-</div>
-</div>
-<div id="auto-vault-info" class="flex items-center justify-between pt-3 border-t border-border-light">
-<div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-accent-green text-base">auto_awesome</span>
-<div>
-<p id="auto-vault-name" class="text-xs font-semibold"></p>
-<p id="auto-vault-meta" class="text-[10px] text-gray-400"></p>
-</div>
-</div>
-<span class="text-[10px] font-bold uppercase tracking-widest text-gray-300">Best Pick</span>
-</div>
-</div>
-</div>
-
-<!-- Manual mode: vault dropdown -->
-<div id="section-manual" class="hidden space-y-2">
-<div class="relative" id="vault-selector-wrapper">
-<div id="vault-selector-card"
-  onclick="toggleDropdown()"
-  class="cursor-pointer border border-border-light p-4 rounded-lg hover:border-gray-400 transition-all select-none">
-</div>
-<div id="vault-dropdown"
-  class="hidden absolute top-full left-0 right-0 z-20 mt-1 border border-border-light bg-white rounded-lg shadow-lg overflow-hidden">
-<div class="max-h-64 overflow-y-auto divide-y divide-border-light" id="vault-dropdown-list"></div>
-</div>
-</div>
-<a href="discover.html"
-  class="flex items-center justify-end gap-1 text-[11px] font-semibold text-primary hover:opacity-70 transition-colors pr-1">
-  Discover More Vaults
-  <span class="material-symbols-outlined text-sm">arrow_forward</span>
-</a>
-</div>
-
 <!-- Amount input -->
 <div class="space-y-2">
 <div class="flex justify-between">
@@ -421,18 +365,6 @@
 
 <!-- ── Remove tab ────────────────────────────────────────── -->
 <div id="tab-remove" class="hidden space-y-6">
-
-<!-- Vault selector -->
-<div class="relative" id="remove-vault-wrapper">
-<div id="remove-vault-card"
-  onclick="toggleRemoveDropdown()"
-  class="cursor-pointer border border-border-light p-4 rounded-lg hover:border-gray-400 transition-all select-none">
-</div>
-<div id="remove-vault-dropdown"
-  class="hidden absolute top-full left-0 right-0 z-20 mt-1 border border-border-light bg-white rounded-lg shadow-lg overflow-hidden">
-<div class="max-h-64 overflow-y-auto divide-y divide-border-light" id="remove-vault-dropdown-list"></div>
-</div>
-</div>
 
 <!-- Amount to withdraw -->
 <div class="space-y-2">
@@ -488,14 +420,8 @@
 
 <script>
 // ─── State ──────────────────────────────────────────────────────────────
-let mode = "auto";
 let currentTab = "allocate";
-let selectedVault = null;
 let selectedRemoveVault = null;
-let dropdownOpen = false;
-let removeDropdownOpen = false;
-
-const bestVault = VAULTS.reduce((a, b) => (a.apy > b.apy ? a : b));
 
 // ─── Tab switching ───────────────────────────────────────────────────────
 function setTab(tab) {
@@ -513,165 +439,10 @@ function setTab(tab) {
   document.getElementById("tab-remove").classList.toggle("hidden", isAllocate);
 }
 
-// ─── Mode toggle ─────────────────────────────────────────────────────────
-function setMode(m) {
-  mode = m;
-  const btnAuto   = document.getElementById("btn-auto");
-  const btnManual = document.getElementById("btn-manual");
-  const secAuto   = document.getElementById("section-auto");
-  const secManual = document.getElementById("section-manual");
-  const activeClass   = ["bg-white", "text-primary", "shadow-sm"];
-  const inactiveClass = ["text-gray-400"];
-  if (m === "auto") {
-    btnAuto.classList.add(...activeClass);    btnAuto.classList.remove(...inactiveClass);
-    btnManual.classList.remove(...activeClass); btnManual.classList.add(...inactiveClass);
-    secAuto.classList.remove("hidden");  secManual.classList.add("hidden");
-  } else {
-    btnManual.classList.add(...activeClass);    btnManual.classList.remove(...inactiveClass);
-    btnAuto.classList.remove(...activeClass);   btnAuto.classList.add(...inactiveClass);
-    secManual.classList.remove("hidden"); secAuto.classList.add("hidden");
-  }
-}
-
-// ─── Auto mode ───────────────────────────────────────────────────────────
-function renderAutoMode() {
-  document.getElementById("auto-apy").textContent        = bestVault.apy.toFixed(2) + "%";
-  document.getElementById("auto-vault-name").textContent = bestVault.name;
-  document.getElementById("auto-vault-meta").textContent = `${bestVault.curator} · ${bestVault.tvlDisplay} TVL`;
-}
-
-// ─── Manual mode: vault card ─────────────────────────────────────────────
-function renderVaultCard() {
-  const v = selectedVault;
-  document.getElementById("vault-selector-card").innerHTML = `
-    <div class="flex items-center justify-between">
-      <div class="flex items-center gap-3">
-        <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center shrink-0">${v.icon}</div>
-        <div>
-          <p class="text-sm font-semibold">${v.name}</p>
-          <p class="text-[11px] text-gray-400">${v.curator} · ${v.tvlDisplay} TVL</p>
-        </div>
-      </div>
-      <div class="flex items-center gap-3 shrink-0">
-        <span class="text-sm font-bold text-accent-green">${v.apy.toFixed(2)}%</span>
-        <span class="material-symbols-outlined text-gray-400 transition-transform duration-200" id="dropdown-chevron">expand_more</span>
-      </div>
-    </div>`;
-}
-
-// ─── Manual mode: dropdown list ──────────────────────────────────────────
-function renderDropdownList() {
-  document.getElementById("vault-dropdown-list").innerHTML = VAULTS.map((v, i) => `
-    <div data-idx="${i}" class="flex items-center justify-between px-4 py-3 cursor-pointer hover:bg-gray-50 transition-colors ${v.name === selectedVault.name ? "bg-gray-50" : ""}">
-      <div class="flex items-center gap-3">
-        <div class="w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center shrink-0">${v.icon}</div>
-        <div>
-          <p class="text-sm font-medium">${v.name}</p>
-          <p class="text-[10px] text-gray-400">${v.curator} · ${v.tvlDisplay}</p>
-        </div>
-      </div>
-      <div class="flex items-center gap-2 shrink-0">
-        <span class="text-sm font-bold text-accent-green">${v.apy.toFixed(2)}%</span>
-        ${v.name === selectedVault.name ? '<span class="material-symbols-outlined text-accent-green text-base">check</span>' : ""}
-      </div>
-    </div>`).join("");
-  document.getElementById("vault-dropdown-list").onclick = e => {
-    const item = e.target.closest("[data-idx]");
-    if (!item) return;
-    selectedVault = VAULTS[parseInt(item.dataset.idx)];
-    renderVaultCard(); renderDropdownList(); closeDropdown();
-  };
-}
-
-// ─── Dropdown open/close ─────────────────────────────────────────────────
-function toggleDropdown() { dropdownOpen ? closeDropdown() : openDropdown(); }
-function openDropdown() {
-  dropdownOpen = true;
-  document.getElementById("vault-dropdown").classList.remove("hidden");
-  const c = document.getElementById("dropdown-chevron"); if (c) c.style.transform = "rotate(180deg)";
-}
-function closeDropdown() {
-  dropdownOpen = false;
-  document.getElementById("vault-dropdown").classList.add("hidden");
-  const c = document.getElementById("dropdown-chevron"); if (c) c.style.transform = "";
-}
-
-document.addEventListener("click", e => {
-  const w = document.getElementById("vault-selector-wrapper");
-  if (w && !w.contains(e.target)) closeDropdown();
-  const rw = document.getElementById("remove-vault-wrapper");
-  if (rw && !rw.contains(e.target)) closeRemoveDropdown();
-});
-
-// ─── Remove tab: vault card ───────────────────────────────────────────────
-function renderRemoveVaultCard() {
-  const v = selectedRemoveVault;
-  document.getElementById("remove-vault-card").innerHTML = `
-    <div class="flex items-center justify-between">
-      <div class="flex items-center gap-3">
-        <div class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center shrink-0">${v.icon}</div>
-        <div>
-          <p class="text-sm font-semibold">${v.name}</p>
-          <p class="text-[11px] text-gray-400">${v.curator} · ${v.tvlDisplay} TVL</p>
-        </div>
-      </div>
-      <div class="flex items-center gap-3 shrink-0">
-        <span class="text-sm font-bold text-accent-green">${(v.balance || 0).toFixed(2)} USDC</span>
-        <span class="material-symbols-outlined text-gray-400 transition-transform duration-200" id="remove-chevron">expand_more</span>
-      </div>
-    </div>`;
-  const bal = (v.balance || 0).toFixed(2);
-  document.getElementById("remove-deposited-label").textContent = "Deposited: " + bal + " USDC";
-}
-
-function renderRemoveDropdownList() {
-  const depositedVaults = VAULTS.filter(v => v.balance > 0);
-  document.getElementById("remove-vault-dropdown-list").innerHTML = depositedVaults.map(v => {
-    const origIdx = VAULTS.indexOf(v);
-    return `
-    <div data-ridx="${origIdx}" class="flex items-center justify-between px-4 py-3 cursor-pointer hover:bg-gray-50 transition-colors ${v.name === selectedRemoveVault.name ? "bg-gray-50" : ""}">
-      <div class="flex items-center gap-3">
-        <div class="w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center shrink-0">${v.icon}</div>
-        <div>
-          <p class="text-sm font-medium">${v.name}</p>
-          <p class="text-[10px] text-gray-400">${v.curator} · ${v.tvlDisplay}</p>
-        </div>
-      </div>
-      <div class="flex items-center gap-2 shrink-0">
-        <span class="text-sm font-bold text-accent-green">${v.balance.toFixed(2)} USDC</span>
-        ${v.name === selectedRemoveVault.name ? '<span class="material-symbols-outlined text-accent-green text-base">check</span>' : ""}
-      </div>
-    </div>`}).join("");
-  document.getElementById("remove-vault-dropdown-list").onclick = e => {
-    const item = e.target.closest("[data-ridx]");
-    if (!item) return;
-    selectedRemoveVault = VAULTS[parseInt(item.dataset.ridx)];
-    renderRemoveVaultCard(); renderRemoveDropdownList(); closeRemoveDropdown();
-  };
-}
-
-function toggleRemoveDropdown() { removeDropdownOpen ? closeRemoveDropdown() : openRemoveDropdown(); }
-function openRemoveDropdown() {
-  removeDropdownOpen = true;
-  document.getElementById("remove-vault-dropdown").classList.remove("hidden");
-  const c = document.getElementById("remove-chevron"); if (c) c.style.transform = "rotate(180deg)";
-}
-function closeRemoveDropdown() {
-  removeDropdownOpen = false;
-  document.getElementById("remove-vault-dropdown").classList.add("hidden");
-  const c = document.getElementById("remove-chevron"); if (c) c.style.transform = "";
-}
-
 // ─── Init ────────────────────────────────────────────────────────────────
-selectedVault       = VAULTS.find(v => v.name === "Gauntlet USDC Frontier") || VAULTS[0];
 selectedRemoveVault = VAULTS.find(v => v.balance > 0) || VAULTS[0];
-
-renderAutoMode();
-renderVaultCard();
-renderDropdownList();
-renderRemoveVaultCard();
-renderRemoveDropdownList();
-setMode("auto");
+document.getElementById("remove-deposited-label").textContent =
+  "Deposited: " + (selectedRemoveVault.balance || 0).toFixed(2) + " USDC";
 setTab("allocate");
 </script>
 
