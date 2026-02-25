@@ -12,10 +12,11 @@
             theme: {
                 extend: {
                     colors: {
-                        "primary": "#1B2A4A",
+                        "primary": "#0D0D0D",
+                        "navy": "#1B2A4A",
+                        "border-gray": "#E5E5E5",
                         "background-light": "#FFFFFF",
-                        "background-dark": "#191919",
-                        "border-gray": "#E5E7EB",
+                        "slate-gray": "#64748B",
                         "chart-navy": "#1B2A4A",
                         "chart-gold": "#C5A059",
                         "chart-slate": "#64748B",
@@ -54,11 +55,11 @@
         .section-label {
             @apply text-[10px] uppercase tracking-[0.2em] text-slate-400 font-bold mb-6 block;
         }
-        .sidebar-item {
-            @apply flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-500 hover:bg-slate-50 hover:text-primary transition-all;
+        .sidebar-link {
+            @apply flex items-center gap-3 px-8 py-3 text-slate-gray hover:text-primary transition-all duration-200 text-sm font-medium border-r-2 border-transparent;
         }
-        .sidebar-item.active {
-            @apply bg-slate-50 text-primary border-r-2 border-primary;
+        .sidebar-link.active {
+            @apply text-primary bg-gray-50 border-r-2 border-navy;
         }
     </style>
 </head>
@@ -72,7 +73,7 @@
 </div>
 <nav class="hidden md:flex items-center gap-8">
 <a class="nav-link" href="#">Overview</a>
-<a class="nav-link" href="#">Portfolio</a>
+<a class="nav-link" href="portfolio_main.html">Portfolio</a>
 <a class="nav-link active" href="#">Agentic</a>
 <a class="nav-link" href="#">Vaults</a>
 <a class="nav-link" href="#">Treasury</a>
@@ -94,35 +95,40 @@
 </div>
 </header>
 <div class="flex flex-1 max-w-[1440px] mx-auto w-full">
-<aside class="w-64 border-r border-border-gray py-8 hidden lg:block">
-<div class="px-6 mb-8">
-<span class="text-[10px] uppercase tracking-[0.2em] text-slate-400 font-bold">Strategy Console</span>
-</div>
-<nav class="space-y-1">
-<a class="sidebar-item" href="#">
-<span class="material-symbols-outlined text-lg">dashboard</span>
-                    Dashboard
-                </a>
-<a class="sidebar-item active" href="#">
-<span class="material-symbols-outlined text-lg">psychology</span>
-                    AI Strategy Builder
-                </a>
-<a class="sidebar-item" href="#">
-<span class="material-symbols-outlined text-lg">history</span>
-                    Execution Logs
-                </a>
-<a class="sidebar-item" href="#">
-<span class="material-symbols-outlined text-lg">settings_suggest</span>
-                    Agent Settings
-                </a>
-</nav>
-<div class="mt-12 px-6">
-<div class="p-4 bg-slate-50 border border-border-gray rounded-sm">
-<p class="text-[10px] uppercase font-bold text-slate-400 mb-2">Agent Status</p>
+<aside class="hidden lg:flex w-64 flex-col border-r border-border-gray bg-white h-full shrink-0">
+<div class="flex h-full flex-col justify-between py-10">
+<div class="flex flex-col gap-12">
+<div class="px-8">
 <div class="flex items-center gap-2">
-<span class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
-<span class="text-xs font-semibold">Active &amp; Watching</span>
+<span class="material-symbols-outlined text-navy text-2xl">account_balance</span>
+<div class="flex flex-col">
+<span class="text-primary text-sm font-bold tracking-widest uppercase">OneVault</span>
+<span class="text-[9px] text-slate-gray font-medium tracking-[0.2em] uppercase">Private Wealth</span>
 </div>
+</div>
+</div>
+<nav class="flex flex-col">
+<a class="sidebar-link" href="portfolio_main.html">
+<span class="material-symbols-outlined text-[20px]">grid_view</span>
+<span>Portfolio</span>
+</a>
+<a class="sidebar-link" href="portfolio_vaults.html">
+<span class="material-symbols-outlined text-[20px]">account_balance_wallet</span>
+<span>Vaults</span>
+</a>
+<a class="sidebar-link" href="portfolio_txs.html">
+<span class="material-symbols-outlined text-[20px]">history</span>
+<span>Activity</span>
+</a>
+<a class="sidebar-link active" href="#">
+<span class="material-symbols-outlined text-[20px]">smart_toy</span>
+<span>Agentic</span>
+</a>
+<a class="sidebar-link" href="portfolio_settings.html">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+<span>Settings</span>
+</a>
+</nav>
 </div>
 </div>
 </aside>
@@ -232,28 +238,15 @@
 </div>
 </main>
 </div>
-<footer class="border-t border-border-gray bg-white mt-auto">
-<div class="max-w-[1440px] mx-auto px-8 py-8 flex flex-col md:flex-row justify-between items-center gap-8">
-<div class="flex gap-12">
-<div>
-<p class="text-[9px] uppercase tracking-widest text-slate-400 font-bold mb-1">Agent Latency</p>
-<div class="flex items-center gap-2">
-<span class="w-1.5 h-1.5 bg-emerald-500 rounded-full"></span>
-<span class="text-[11px] font-bold">14ms • Healthy</span>
-</div>
-</div>
-<div>
-<p class="text-[9px] uppercase tracking-widest text-slate-400 font-bold mb-1">Compliance</p>
-<p class="text-[11px] font-bold">AML/KYC Compliant Layer</p>
-</div>
-</div>
-<div class="flex items-center gap-8 opacity-30 grayscale">
-<span class="text-[9px] uppercase tracking-widest font-bold">Strategic Partners</span>
-<div class="flex gap-6">
-<div class="w-20 h-4 bg-primary rounded-sm"></div>
-<div class="w-16 h-4 bg-primary rounded-sm"></div>
-<div class="w-24 h-4 bg-primary rounded-sm"></div>
-</div>
+<footer class="w-full px-8 py-10 border-t border-[#E5E5E5] mt-12 bg-white">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="text-[11px] text-[#666666] tracking-widest uppercase font-display">
+            © 2024 OneVault Institutional. All rights reserved.
+        </div>
+<div class="flex gap-8 text-[11px] font-bold uppercase tracking-widest font-display">
+<a class="hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-primary transition-colors" href="#">Terms of Service</a>
+<a class="hover:text-primary transition-colors" href="#">Audit Reports</a>
 </div>
 </div>
 </footer>

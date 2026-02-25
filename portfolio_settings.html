@@ -12,12 +12,11 @@
             theme: {
                 extend: {
                     colors: {
-                        "primary": "#000000",
-                        "navy": "#0A192F",
-                        "light-gray": "#F3F4F6",
-                        "border-gray": "#E5E7EB",
+                        "primary": "#0D0D0D",
+                        "navy": "#1B2A4A",
+                        "border-gray": "#E5E5E5",
                         "background-light": "#FFFFFF",
-                        "background-dark": "#191919",
+                        "slate-gray": "#64748B",
                     },
                     fontFamily: {
                         "display": ["Inter", "sans-serif"],
@@ -27,7 +26,7 @@
                         "DEFAULT": "0px",
                         "lg": "0px",
                         "xl": "0px",
-                        "full": "0px"
+                        "full": "9999px"
                     },
                 },
             },
@@ -38,6 +37,12 @@
             body {
                 @apply bg-white text-black font-display antialiased;
             }
+        }
+        .sidebar-link {
+            @apply flex items-center gap-3 px-8 py-3 text-slate-gray hover:text-primary transition-all duration-200 text-sm font-medium border-r-2 border-transparent;
+        }
+        .sidebar-link.active {
+            @apply text-primary bg-gray-50 border-r-2 border-navy;
         }
         .nav-active {
             @apply border-l-2 border-navy font-semibold text-black;
@@ -57,33 +62,41 @@
 </head>
 <body class="bg-white text-black">
 <div class="relative flex h-screen w-full overflow-hidden bg-white">
-<aside class="flex w-64 flex-col border-r border-border-gray bg-white hidden md:flex">
-<div class="flex h-16 items-center gap-3 px-8 border-b border-border-gray">
-<div class="size-6 bg-black"></div>
-<h2 class="text-sm font-bold tracking-widest uppercase">OneVault</h2>
+<aside class="hidden lg:flex w-64 flex-col border-r border-border-gray bg-white h-full shrink-0">
+<div class="flex h-full flex-col justify-between py-10">
+<div class="flex flex-col gap-12">
+<div class="px-8">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-navy text-2xl">account_balance</span>
+<div class="flex flex-col">
+<span class="text-primary text-sm font-bold tracking-widest uppercase">OneVault</span>
+<span class="text-[9px] text-slate-gray font-medium tracking-[0.2em] uppercase">Private Wealth</span>
 </div>
-<div class="flex flex-col gap-8 p-8 flex-1 overflow-y-auto">
-<nav class="space-y-4">
-<p class="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-4">Portfolio</p>
-<a class="flex items-center gap-3 text-sm text-gray-400 hover:text-black transition-colors" href="#">
-<span class="text-xs font-medium">Dashboard</span>
+</div>
+</div>
+<nav class="flex flex-col">
+<a class="sidebar-link" href="portfolio_main.html">
+<span class="material-symbols-outlined text-[20px]">grid_view</span>
+<span>Portfolio</span>
 </a>
-<a class="flex items-center gap-3 text-sm text-gray-400 hover:text-black transition-colors" href="#">
-<span class="text-xs font-medium">Assets</span>
+<a class="sidebar-link" href="portfolio_vaults.html">
+<span class="material-symbols-outlined text-[20px]">account_balance_wallet</span>
+<span>Vaults</span>
 </a>
-<a class="flex items-center gap-3 text-sm text-gray-400 hover:text-black transition-colors" href="#">
-<span class="text-xs font-medium">Transactions</span>
+<a class="sidebar-link" href="portfolio_txs.html">
+<span class="material-symbols-outlined text-[20px]">history</span>
+<span>Activity</span>
+</a>
+<a class="sidebar-link" href="portfolio_ai.html">
+<span class="material-symbols-outlined text-[20px]">smart_toy</span>
+<span>Agentic</span>
+</a>
+<a class="sidebar-link active" href="#">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+<span>Settings</span>
 </a>
 </nav>
-<nav class="space-y-4 mt-auto">
-<p class="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-4">Account</p>
-<a class="flex items-center gap-3 text-sm font-bold text-black" href="#">
-<span class="text-xs">Settings</span>
-</a>
-<a class="flex items-center gap-3 text-sm text-gray-400 hover:text-red-600 transition-colors" href="#">
-<span class="text-xs font-medium">Sign Out</span>
-</a>
-</nav>
+</div>
 </div>
 </aside>
 <main class="flex-1 flex flex-col min-w-0 bg-white overflow-hidden">

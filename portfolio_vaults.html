@@ -10,11 +10,17 @@
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <style type="text/tailwindcss">
         :root {
-            --dark-navy: #0A192F;
-            --border-light: #E5E7EB;
+            --dark-navy: #1B2A4A;
+            --border-light: #E5E5E5;
         }
         body {
             font-family: 'Inter', sans-serif;
+        }
+        .sidebar-link {
+            @apply flex items-center gap-3 px-8 py-3 text-slate-gray hover:text-primary transition-all duration-200 text-sm font-medium border-r-2 border-transparent;
+        }
+        .sidebar-link.active {
+            @apply text-primary bg-gray-50 border-r-2 border-navy;
         }
     </style>
 <script>
@@ -23,10 +29,11 @@
             theme: {
                 extend: {
                     colors: {
-                        "primary": "#000000",
-                        "navy": "#0A192F",
+                        "primary": "#0D0D0D",
+                        "navy": "#1B2A4A",
+                        "border-gray": "#E5E5E5",
                         "background-light": "#FFFFFF",
-                        "background-dark": "#191919",
+                        "slate-gray": "#64748B",
                     },
                     fontFamily: {
                         "display": ["Inter", "sans-serif"]
@@ -44,37 +51,42 @@
 </head>
 <body class="bg-white font-display text-black antialiased selection:bg-navy selection:text-white">
 <div class="relative flex h-screen w-full overflow-hidden bg-white">
-<aside class="flex w-64 flex-col justify-between border-r border-gray-100 bg-white p-6 hidden lg:flex">
-<div class="flex flex-col gap-8">
-<div class="flex items-center gap-3 py-2">
-<div class="h-8 w-8 rounded-full bg-gray-100 bg-cover bg-center border border-gray-200" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDC-ZOX351QIB3evjAhqJfyAsAvlg9JkHo3RJ3J7ILTKxnO4BEGdQCgWb7ofihrPApqDPFbEWyvxtsj-27a__KG63RkGldVECZ20x6eai_PaMNpM8-lAqgNbaUvvvzDamrIBF5pGi2n64AVfd1PDSCGrOLeu1NdEoXfQ-M1-FUbjRHbhiDxRUc7qFKDusvf5jAy2vxLqzZy051ePDPkzLbutZwhBNItcMLUH0WoU7drw587WPf_ekm25x0tcSr97nLTfIzw56Mm86M');"></div>
+<aside class="hidden lg:flex w-64 flex-col border-r border-border-gray bg-white h-full shrink-0">
+<div class="flex h-full flex-col justify-between py-10">
+<div class="flex flex-col gap-12">
+<div class="px-8">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-navy text-2xl">account_balance</span>
 <div class="flex flex-col">
-<h1 class="text-xs font-bold tracking-tight uppercase">OneVault</h1>
-<p class="text-[10px] text-gray-400 uppercase tracking-widest">Portfolio Admin</p>
+<span class="text-primary text-sm font-bold tracking-widest uppercase">OneVault</span>
+<span class="text-[9px] text-slate-gray font-medium tracking-[0.2em] uppercase">Private Wealth</span>
 </div>
 </div>
-<nav class="flex flex-col gap-1">
-<a class="flex items-center gap-3 px-2 py-2 text-gray-400 hover:text-black transition-colors" href="#">
-<span class="material-symbols-outlined text-[18px]">dashboard</span>
-<span class="text-xs font-medium uppercase tracking-wider">Overview</span>
+</div>
+<nav class="flex flex-col">
+<a class="sidebar-link" href="portfolio_main.html">
+<span class="material-symbols-outlined text-[20px]">grid_view</span>
+<span>Portfolio</span>
 </a>
-<a class="flex items-center gap-3 px-2 py-2 text-black border-l-2 border-black" href="#">
-<span class="material-symbols-outlined text-[18px]">account_balance_wallet</span>
-<span class="text-xs font-bold uppercase tracking-wider">Vaults</span>
+<a class="sidebar-link active" href="#">
+<span class="material-symbols-outlined text-[20px]">account_balance_wallet</span>
+<span>Vaults</span>
 </a>
-<a class="flex items-center gap-3 px-2 py-2 text-gray-400 hover:text-black transition-colors" href="#">
-<span class="material-symbols-outlined text-[18px]">swap_horiz</span>
-<span class="text-xs font-medium uppercase tracking-wider">Activity</span>
+<a class="sidebar-link" href="portfolio_txs.html">
+<span class="material-symbols-outlined text-[20px]">history</span>
+<span>Activity</span>
 </a>
-<a class="flex items-center gap-3 px-2 py-2 text-gray-400 hover:text-black transition-colors" href="#">
-<span class="material-symbols-outlined text-[18px]">settings</span>
-<span class="text-xs font-medium uppercase tracking-wider">Settings</span>
+<a class="sidebar-link" href="portfolio_ai.html">
+<span class="material-symbols-outlined text-[20px]">smart_toy</span>
+<span>Agentic</span>
+</a>
+<a class="sidebar-link" href="portfolio_settings.html">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+<span>Settings</span>
 </a>
 </nav>
 </div>
-<button class="flex w-full items-center justify-center gap-2 border border-black py-2 text-[10px] font-bold uppercase tracking-widest hover:bg-black hover:text-white transition-all">
-<span>Connect Wallet</span>
-</button>
+</div>
 </aside>
 <main class="flex-1 flex flex-col h-full overflow-hidden">
 <div class="lg:hidden flex items-center justify-between p-4 border-b border-gray-100 bg-white">
