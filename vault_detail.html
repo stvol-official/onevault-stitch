@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Master Vault Integrated Analytics - OneVault Private Bank</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=IBM+Plex+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#000000",
+                        "navy": "#0A192F",
+                        "background-light": "#f7f7f7",
+                        "background-dark": "#191919",
+                        "border-gray": "#E5E7EB",
+                    },
+                    fontFamily: {
+                        "display": ["IBM Plex Sans", "Inter", "sans-serif"],
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        @layer base {
+            body {
+                @apply bg-background-light text-primary font-display antialiased;
+            }
+        }
+        @layer components {
+            .financial-section {
+                @apply border-t border-primary/10 pt-8 mt-12;
+            }
+            .tab-active {
+                @apply border-b-2 border-primary text-primary font-bold;
+            }
+            .tab-inactive {
+                @apply text-slate-400 hover:text-primary transition-colors font-medium;
+            }
+            .minimalist-chart-card {
+                @apply bg-white border border-border-gray p-6 flex flex-col shadow-sm;
+            }
+            .table-header {
+                @apply text-[10px] font-bold uppercase tracking-widest text-slate-400 border-b border-border-gray pb-3 text-left;
+            }
+            .table-cell {
+                @apply py-4 text-[12px] font-medium text-primary border-b border-slate-50;
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+<header class="w-full border-b border-[#E5E5E5] bg-white sticky top-0 z-50">
+<div class="max-w-[1200px] mx-auto flex items-center justify-between px-6 py-4">
+<div class="flex items-center gap-10">
+<a class="flex items-center gap-2" href="index.html">
+<span class="material-symbols-outlined text-primary text-2xl">account_balance</span>
+<span class="font-bold text-xl tracking-tight font-display">OneVault</span>
+</a>
+<nav class="hidden md:flex items-center gap-8 text-sm font-medium">
+<a class="text-slate-500 hover:text-primary transition-colors font-display" href="allocator.html">Allocate</a>
+<a class="text-primary border-b-2 border-primary pb-0.5 font-display" href="discover.html">Discover</a>
+<a class="text-slate-500 hover:text-primary transition-colors font-display" href="portfolio_admin_-_main.html">Portfolio</a>
+</nav>
+</div>
+<div class="flex items-center gap-6">
+<button class="bg-primary text-white text-xs font-bold uppercase tracking-widest px-5 py-2.5 hover:bg-slate-800 transition-colors font-display">
+                Connect Wallet
+            </button>
+</div>
+</div>
+</header>
+<main class="max-w-7xl mx-auto px-6 pt-12 pb-24">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
+<div class="lg:col-span-8 space-y-12">
+<div>
+<div class="flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.25em] text-slate-400 mb-5">
+<span>Institutional Strategy</span>
+<span class="size-1 bg-slate-300 rounded-full"></span>
+<span>Verified Stablecoin</span>
+</div>
+<h1 class="text-7xl font-extrabold text-primary tracking-tighter mb-8">Arc Low Risk Vault</h1>
+<p class="text-lg text-slate-600 max-w-2xl leading-relaxed font-medium mb-12">
+                    Automatically allocate to the highest-performing institutional strategies via the OneVault Master Vault. Optimized for capital preservation and maximum yield efficiency.
+                </p>
+<div class="flex flex-wrap gap-20 items-end">
+<div>
+<span class="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400 block mb-2">30D APY</span>
+<span class="text-6xl font-extrabold tracking-tighter text-primary">18.42%</span>
+</div>
+<div>
+<span class="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400 block mb-2">Share Price</span>
+<span class="text-6xl font-extrabold tracking-tighter text-primary">$1.042</span>
+</div>
+<div>
+<span class="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400 block mb-2">TVL</span>
+<span class="text-6xl font-extrabold tracking-tighter text-primary">$32.5M</span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-12 py-10 border-y border-border-gray">
+<div>
+<span class="text-[10px] font-bold uppercase tracking-widest text-slate-400 block mb-2">Target Risk</span>
+<span class="text-4xl font-bold tracking-tight tabular-nums text-primary uppercase">Low</span>
+</div>
+<div>
+<span class="text-[10px] font-bold uppercase tracking-widest text-slate-400 block mb-2">Risk Rating</span>
+<span class="text-4xl font-bold tracking-tight text-emerald-600">AA+</span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="minimalist-chart-card">
+<div class="flex justify-between items-start mb-6">
+<div>
+<span class="text-[10px] font-bold uppercase tracking-widest text-slate-400 block mb-1">Performance (APY)</span>
+<span class="text-4xl font-extrabold tracking-tighter text-primary">18.42%</span>
+</div>
+<span class="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2 py-1">+2.4%</span>
+</div>
+<div class="h-48 w-full relative">
+<svg class="absolute inset-0 w-full h-full" preserveAspectRatio="none" viewBox="0 0 1000 200">
+<path d="M0,180 L100,165 L200,172 L300,135 L400,145 L500,105 L600,115 L700,65 L800,75 L900,25 L1000,35" fill="none" stroke="#0A192F" stroke-width="1.5"></path>
+</svg>
+</div>
+<div class="flex justify-between mt-4 text-[9px] font-bold text-slate-400 uppercase tracking-widest">
+<span>Jan 23</span>
+<span>Jun 23</span>
+<span>Dec 23</span>
+</div>
+</div>
+<div class="minimalist-chart-card">
+<div class="flex justify-between items-start mb-6">
+<div>
+<span class="text-[10px] font-bold uppercase tracking-widest text-slate-400 block mb-1">TVL (USD)</span>
+<span class="text-4xl font-extrabold tracking-tighter text-primary">$32.5M</span>
+</div>
+<span class="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2 py-1">+12.8%</span>
+</div>
+<div class="h-48 w-full relative">
+<svg class="absolute inset-0 w-full h-full" preserveAspectRatio="none" viewBox="0 0 1000 200">
+<path d="M0,190 L100,180 L200,165 L300,150 L400,110 L500,100 L600,80 L700,60 L800,45 L900,30 L1000,10" fill="none" stroke="#0A192F" stroke-width="1.5"></path>
+</svg>
+</div>
+<div class="flex justify-between mt-4 text-[9px] font-bold text-slate-400 uppercase tracking-widest">
+<span>Jan 23</span>
+<span>Jun 23</span>
+<span>Dec 23</span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start py-10 border-t border-border-gray">
+<div class="md:col-span-5 minimalist-chart-card">
+<h3 class="text-[11px] font-extrabold uppercase tracking-widest text-primary mb-8">Allocation Weight</h3>
+<div class="relative flex justify-center mb-8">
+<svg class="w-48 h-48" viewBox="0 0 36 36">
+<circle cx="18" cy="18" fill="transparent" r="15.91549430918954" stroke="#F1F5F9" stroke-width="3"></circle>
+<circle cx="18" cy="18" fill="transparent" r="15.91549430918954" stroke="#0A192F" stroke-dasharray="45 55" stroke-dashoffset="25" stroke-width="3"></circle>
+<circle cx="18" cy="18" fill="transparent" r="15.91549430918954" stroke="#475569" stroke-dasharray="35 65" stroke-dashoffset="80" stroke-width="3"></circle>
+<circle cx="18" cy="18" fill="transparent" r="15.91549430918954" stroke="#94A3B8" stroke-dasharray="20 80" stroke-dashoffset="45" stroke-width="3"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center text-center">
+<span class="text-[10px] font-extrabold text-slate-400 tracking-widest uppercase">Vaults</span>
+<span class="text-xl font-extrabold text-primary tracking-tighter">100%</span>
+</div>
+</div>
+<div class="space-y-3">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-navy"></span>
+<span class="text-[10px] font-bold uppercase text-slate-500">Master Vault Alpha</span>
+</div>
+<span class="text-[10px] font-bold tabular-nums">45%</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-slate-600"></span>
+<span class="text-[10px] font-bold uppercase text-slate-500">Global Yield Aggregator</span>
+</div>
+<span class="text-[10px] font-bold tabular-nums">35%</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-slate-400"></span>
+<span class="text-[10px] font-bold uppercase text-slate-500">Real World Assets</span>
+</div>
+<span class="text-[10px] font-bold tabular-nums">20%</span>
+</div>
+</div>
+</div>
+<div class="md:col-span-7 bg-white border border-border-gray p-6 shadow-sm">
+<h3 class="text-[11px] font-extrabold uppercase tracking-widest text-primary mb-6">Active Asset Distribution</h3>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr>
+<th class="table-header">Vault Asset</th>
+<th class="table-header">Allocation</th>
+<th class="table-header">Current APY</th>
+<th class="table-header">Market Value</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-50">
+<tr>
+<td class="table-cell">
+<div class="flex items-center gap-2">
+<div class="w-4 h-4 bg-navy/10 rounded-full flex items-center justify-center text-[8px] font-bold">U</div>
+                                            USDC Stablecoin
+                                        </div>
+</td>
+<td class="table-cell tabular-nums">45.0%</td>
+<td class="table-cell tabular-nums text-emerald-600">19.2%</td>
+<td class="table-cell tabular-nums">$14.62M</td>
+</tr>
+<tr>
+<td class="table-cell">
+<div class="flex items-center gap-2">
+<div class="w-4 h-4 bg-navy/10 rounded-full flex items-center justify-center text-[8px] font-bold">D</div>
+                                            DAI Aggregator
+                                        </div>
+</td>
+<td class="table-cell tabular-nums">35.0%</td>
+<td class="table-cell tabular-nums text-emerald-600">17.8%</td>
+<td class="table-cell tabular-nums">$11.38M</td>
+</tr>
+<tr>
+<td class="table-cell">
+<div class="flex items-center gap-2">
+<div class="w-4 h-4 bg-navy/10 rounded-full flex items-center justify-center text-[8px] font-bold">T</div>
+                                            T-Bill Tokens
+                                        </div>
+</td>
+<td class="table-cell tabular-nums">20.0%</td>
+<td class="table-cell tabular-nums text-emerald-600">5.4%</td>
+<td class="table-cell tabular-nums">$6.50M</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<section class="financial-section">
+<h3 class="text-xs font-extrabold uppercase tracking-[0.2em] mb-10 border-b-2 border-primary pb-3 inline-block">Risk Analysis Report</h3>
+<div class="grid md:grid-cols-2 gap-16">
+<div class="space-y-10">
+<div class="flex items-start gap-5">
+<span class="material-symbols-outlined text-slate-400 text-xl">shield</span>
+<div>
+<h4 class="text-xs font-extrabold uppercase tracking-wider text-primary">Protocol Safety</h4>
+<p class="text-[13px] text-slate-600 leading-relaxed mt-3 font-medium">All underlying protocols are audited by Top-Tier security firms. Assets are stored in multi-signature cold storage environments with institutional custody providers.</p>
+</div>
+</div>
+<div class="flex items-start gap-5">
+<span class="material-symbols-outlined text-slate-400 text-xl">fluid</span>
+<div>
+<h4 class="text-xs font-extrabold uppercase tracking-wider text-primary">Liquidity Depth</h4>
+<p class="text-[13px] text-slate-600 leading-relaxed mt-3 font-medium">Master Vault maintains a 15% liquidity buffer to ensure instantaneous withdrawals up to $5M per transaction without slippage concerns.</p>
+</div>
+</div>
+</div>
+<div class="bg-white p-8 space-y-6 border border-border-gray shadow-sm">
+<h4 class="text-[11px] font-extrabold uppercase tracking-widest text-slate-400 pb-2 border-b border-slate-100">Portfolio Composition</h4>
+<div class="space-y-5">
+<div class="space-y-2">
+<div class="flex justify-between items-center text-[11px] font-bold uppercase">
+<span>Lending Markets</span>
+<span class="tabular-nums">42.5%</span>
+</div>
+<div class="w-full bg-slate-100 h-1.5">
+<div class="bg-navy h-full w-[42.5%]"></div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between items-center text-[11px] font-bold uppercase">
+<span>DEX LP Positions</span>
+<span class="tabular-nums">35.0%</span>
+</div>
+<div class="w-full bg-slate-100 h-1.5">
+<div class="bg-navy h-full w-[35%]"></div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between items-center text-[11px] font-bold uppercase">
+<span>Direct Treasury Bonds</span>
+<span class="tabular-nums">22.5%</span>
+</div>
+<div class="w-full bg-slate-100 h-1.5">
+<div class="bg-navy h-full w-[22.5%]"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<div class="lg:col-span-4">
+<div class="sticky top-24 border border-border-gray bg-white p-10 space-y-10 shadow-sm">
+<div class="flex gap-10 border-b border-border-gray">
+<button class="pb-4 text-[11px] font-extrabold uppercase tracking-[0.15em] tab-active">Allocate</button>
+<button class="pb-4 text-[11px] font-extrabold uppercase tracking-[0.15em] tab-inactive">Remove</button>
+</div>
+<div class="space-y-5">
+<div class="flex justify-between items-end">
+<label class="text-[10px] font-extrabold uppercase tracking-widest text-slate-400">Asset to Deposit</label>
+<span class="text-[10px] font-bold tabular-nums text-slate-50">Bal: 12,450.00 USDC</span>
+</div>
+<div class="relative border border-slate-200 p-4">
+<input class="w-full border-0 p-0 text-4xl font-bold tracking-tight focus:ring-0 placeholder:text-slate-100 tabular-nums bg-transparent" placeholder="0.00" type="number"/>
+<div class="absolute right-4 bottom-4 flex items-center gap-3">
+<span class="text-sm font-extrabold tracking-tight">USDC</span>
+<button class="text-[9px] font-extrabold uppercase px-2.5 py-1 bg-slate-100 hover:bg-slate-200 transition-colors">Max</button>
+</div>
+</div>
+</div>
+<div class="space-y-4">
+<span class="text-[10px] font-extrabold uppercase tracking-widest text-slate-400">Vault Routing</span>
+<div class="p-5 border border-slate-200 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-slate-600">auto_awesome</span>
+<div>
+<p class="text-[11px] font-extrabold uppercase tracking-tight">Master Vault</p>
+<p class="text-[9px] text-slate-500 uppercase font-bold">Optimized Institutional Path</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-slate-600 text-sm">verified</span>
+</div>
+</div>
+<div class="space-y-4 pt-6">
+<div class="flex justify-between text-[11px] font-bold">
+<span class="text-slate-500 uppercase tracking-tighter">Transaction Fee</span>
+<span class="tabular-nums">$0.00</span>
+</div>
+<div class="flex justify-between text-[11px] font-bold">
+<span class="text-slate-500 uppercase tracking-tighter">Expected APY</span>
+<span class="tabular-nums text-emerald-600">18.42%</span>
+</div>
+<div class="flex justify-between text-[11px] font-bold">
+<span class="text-slate-500 uppercase tracking-tighter">Lock-up Period</span>
+<span class="uppercase">None</span>
+</div>
+</div>
+<button class="w-full bg-navy text-white py-5 text-[11px] font-extrabold uppercase tracking-[0.25em] hover:opacity-90 transition-all active:scale-[0.98]">
+                    Allocate to Master Vault
+                </button>
+<p class="text-[9px] text-center text-slate-400 leading-loose uppercase tracking-widest font-bold">
+                    By clicking "Allocate", you agree to the <br/>Private Bank terms of service.
+                </p>
+</div>
+</div>
+</div>
+</main>
+<footer class="border-t border-border-gray bg-white py-16">
+<div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-10">
+<div class="flex items-center gap-2 opacity-30 grayscale">
+<span class="material-symbols-outlined text-xl">account_balance</span>
+<span class="font-extrabold tracking-tight uppercase text-[11px]">OneVault Private Bank</span>
+</div>
+<div class="flex gap-12 text-[10px] font-extrabold uppercase tracking-[0.25em] text-slate-400">
+<a class="hover:text-primary transition-colors" href="#">Docs</a>
+<a class="hover:text-primary transition-colors" href="#">Audits</a>
+<a class="hover:text-primary transition-colors" href="#">Governance</a>
+<a class="hover:text-primary transition-colors" href="#">Legal</a>
+</div>
+<div class="text-[10px] font-bold tracking-tighter text-slate-400">
+            © 2024 ONEVAULT CORP.
+        </div>
+</div>
+</footer>
+
+</body></html>

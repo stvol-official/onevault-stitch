@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html class="" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Smart Yield Terminal | OneVault</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#000000",
+                        "navy": "#1B2A4A",
+                        "border-gray": "#E5E5E5",
+                        "inactive-gray": "#F2F2F2",
+                        "background-light": "#f7f7f7",
+                        "text-main": "#0D0D0D",
+                        "text-muted": "#666666",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        @layer base {
+            body {
+                @apply bg-background-light font-display text-text-main antialiased;
+            }
+        }
+        @layer components {
+            input[type=number]::-webkit-inner-spin-button, 
+            input[type=number]::-webkit-outer-spin-button { 
+                -webkit-appearance: none; 
+                margin: 0; 
+            }
+            input[type=number] {
+                -moz-appearance: textfield;
+            }
+            .nav-link {
+                @apply text-sm font-medium text-text-muted hover:text-text-main transition-colors font-display;
+            }
+            #strat-low:checked ~ div button#action-btn::after { content: "Allocate to Arc Low Risk"; }
+            #strat-med:checked ~ div button#action-btn::after { content: "Allocate to Arc Medium Risk"; }
+            #strat-high:checked ~ div button#action-btn::after { content: "Allocate to Arc High Risk"; }
+            #strat-manual:checked ~ div button#action-btn::after { content: "Manual Allocation"; }#strat-low:checked ~ div [for="strat-low"] > div { @apply border-navy ring-1 ring-navy bg-white; }
+            #strat-med:checked ~ div [for="strat-med"] > div { @apply border-navy ring-1 ring-navy bg-white; }
+            #strat-high:checked ~ div [for="strat-high"] > div { @apply border-navy ring-1 ring-navy bg-white; }
+            #strat-manual:checked ~ div [for="strat-manual"] > div { @apply border-navy ring-1 ring-navy bg-white; }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col bg-background-light">
+<header class="w-full border-b border-[#E5E5E5] bg-white sticky top-0 z-50">
+<div class="max-w-[1200px] mx-auto flex items-center justify-between px-6 py-4">
+<div class="flex items-center gap-10">
+<a class="flex items-center gap-2" href="index.html">
+<span class="material-symbols-outlined text-primary text-2xl">account_balance</span>
+<span class="font-bold text-xl tracking-tight font-display">OneVault</span>
+</a>
+<nav class="hidden md:flex items-center gap-8 text-sm font-medium">
+<a class="text-primary border-b-2 border-primary pb-0.5 font-display" href="allocator.html">Allocate</a>
+<a class="text-slate-500 hover:text-primary transition-colors font-display" href="discover.html">Discover</a>
+<a class="text-slate-500 hover:text-primary transition-colors font-display" href="portfolio_admin_-_main.html">Portfolio</a>
+</nav>
+</div>
+<div class="flex items-center gap-6">
+<button class="bg-primary text-white text-xs font-bold uppercase tracking-widest px-5 py-2.5 hover:bg-slate-800 transition-colors font-display">
+                Connect Wallet
+            </button>
+</div>
+</div>
+</header>
+<main class="flex-grow flex flex-col items-center pt-20 pb-20 px-4">
+<div class="mb-12 text-center max-w-3xl">
+<div class="inline-block px-3 py-1 border border-border-gray text-[10px] font-bold uppercase tracking-[0.2em] text-text-muted mb-6 font-display bg-white">
+            Private Banking Terminal
+        </div>
+<h1 class="text-5xl md:text-6xl font-display font-bold text-primary tracking-tight mb-6">
+            Best Available Yield: <span class="font-normal opacity-80">18.4% APY</span>
+</h1>
+<p class="text-text-muted text-lg max-w-xl mx-auto leading-relaxed font-display">
+            Automatically allocate to the highest-performing institutional strategies via the OneVault Master Vault.
+        </p>
+</div>
+<div class="w-full max-w-[640px] border border-border-gray bg-white p-8 md:p-10 shadow-sm">
+<input checked="" class="sr-only" id="strat-low" name="strategy_mode" type="radio"/>
+<input class="sr-only" id="strat-med" name="strategy_mode" type="radio"/>
+<input class="sr-only" id="strat-high" name="strategy_mode" type="radio"/>
+<input class="sr-only" id="strat-manual" name="strategy_mode" type="radio"/>
+<div class="space-y-8">
+<div class="flex bg-inactive-gray p-1 rounded-sm">
+<label class="flex-1 cursor-pointer">
+<input checked="" class="sr-only peer" name="action_type" type="radio"/>
+<span class="flex items-center justify-center py-2.5 text-xs font-bold uppercase tracking-widest transition-all duration-200 bg-transparent text-text-muted peer-checked:bg-navy peer-checked:text-white font-display">
+                        Allocate
+                    </span>
+</label>
+<label class="flex-1 cursor-pointer">
+<input class="sr-only peer" name="action_type" type="radio"/>
+<span class="flex items-center justify-center py-2.5 text-xs font-bold uppercase tracking-widest transition-all duration-200 bg-transparent text-text-muted peer-checked:bg-navy peer-checked:text-white font-display">
+                        Remove
+                    </span>
+</label>
+</div>
+<div class="space-y-4">
+<div class="flex items-center justify-between">
+<label class="text-[11px] font-bold uppercase tracking-widest text-text-muted font-display">Strategy Selection</label>
+<div class="flex items-center gap-1 text-[11px] text-primary cursor-help underline underline-offset-2 font-display">
+                        View Risk Parameters
+                    </div>
+</div>
+<div class="space-y-3">
+<div class="grid grid-cols-3 gap-3">
+<label class="relative cursor-pointer group" for="strat-low">
+<div class="flex flex-col items-center justify-center py-6 px-2 border border-border-gray bg-white transition-all duration-200 hover:bg-gray-50 h-full">
+<span class="material-symbols-outlined mb-2 text-primary text-xl opacity-70 group-hover:opacity-100">verified_user</span>
+<span class="text-[11px] font-bold text-primary font-display text-center leading-tight">Arc Low Risk</span>
+<span class="text-[8px] text-text-muted uppercase tracking-tight mt-1 font-display">Optimized</span>
+</div>
+</label>
+<label class="relative cursor-pointer group" for="strat-med">
+<div class="flex flex-col items-center justify-center py-6 px-2 border border-border-gray bg-white transition-all duration-200 hover:bg-gray-50 h-full">
+<span class="material-symbols-outlined mb-2 text-primary text-xl opacity-70 group-hover:opacity-100">shield</span>
+<span class="text-[11px] font-bold text-primary font-display text-center leading-tight">Arc Medium Risk</span>
+<span class="text-[8px] text-text-muted uppercase tracking-tight mt-1 font-display">Optimized</span>
+</div>
+</label>
+<label class="relative cursor-pointer group" for="strat-high">
+<div class="flex flex-col items-center justify-center py-6 px-2 border border-border-gray bg-white transition-all duration-200 hover:bg-gray-50 h-full">
+<span class="material-symbols-outlined mb-2 text-primary text-xl opacity-70 group-hover:opacity-100">rocket_launch</span>
+<span class="text-[11px] font-bold text-primary font-display text-center leading-tight">Arc High Risk</span>
+<span class="text-[8px] text-text-muted uppercase tracking-tight mt-1 font-display">Optimized</span>
+</div>
+</label>
+</div>
+<label class="relative cursor-pointer group block" for="strat-manual" onclick="window.location.href='discover.html'">
+<div class="flex items-center justify-center py-4 px-6 border border-border-gray bg-white transition-all duration-200 hover:bg-gray-50">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-xl opacity-70 group-hover:opacity-100">tune</span>
+<div class="flex flex-col">
+<span class="text-[12px] font-bold text-primary font-display leading-none">Manual Selection</span>
+<span class="text-[9px] text-text-muted uppercase tracking-widest mt-0.5 font-display">Self-Managed Allocation</span>
+</div>
+</div>
+</div>
+</label>
+</div>
+</div>
+<div class="space-y-4">
+<div class="flex items-center justify-between">
+<label class="text-[11px] font-bold uppercase tracking-widest text-text-muted font-display">Amount</label>
+<div class="flex items-center gap-2 text-[11px] font-display">
+<span class="text-text-muted">Balance:</span>
+<span class="text-primary font-semibold">4,250.00 USDC</span>
+</div>
+</div>
+<div class="relative">
+<input class="w-full bg-white text-3xl font-display font-medium border border-border-gray py-5 px-6 focus:ring-1 focus:ring-navy focus:border-navy outline-none transition-all placeholder:text-border-gray" placeholder="0.00" type="number"/>
+<div class="absolute right-6 top-1/2 -translate-y-1/2 flex items-center gap-3">
+<button class="text-[10px] font-bold uppercase text-navy border-b border-navy tracking-widest font-display">Max</button>
+<div class="h-6 w-px bg-border-gray"></div>
+<span class="text-sm font-bold text-primary font-display">USDC</span>
+</div>
+</div>
+</div>
+<div class="pt-2">
+<button class="w-full py-5 bg-navy text-white font-bold text-xs uppercase tracking-[0.2em] transition-all hover:bg-black active:scale-[0.98] font-display" id="action-btn">
+</button>
+</div>
+<div class="pt-6 border-t border-border-gray grid grid-cols-2 gap-4">
+<div class="flex flex-col">
+<span class="text-[9px] font-bold uppercase tracking-widest text-text-muted font-display">Vault Assets (TVL)</span>
+<span class="text-primary font-semibold text-sm font-display">$24,500,000.00</span>
+</div>
+<div class="flex flex-col text-right">
+<span class="text-[9px] font-bold uppercase tracking-widest text-text-muted font-display">Yield Engine</span>
+<span class="text-primary font-semibold text-sm uppercase font-display">Institutional</span>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-20 flex flex-col items-center gap-8">
+<span class="text-[9px] uppercase tracking-[0.3em] text-text-muted font-bold font-display">Supported Institutional Liquidity</span>
+<div class="flex flex-wrap gap-12 items-center justify-center opacity-40 grayscale">
+<div class="flex items-center gap-2 font-bold tracking-tighter text-xl font-display">
+<span class="material-symbols-outlined text-[20px]">account_balance</span> LIQUID
+            </div>
+<div class="flex items-center gap-2 font-bold tracking-tighter text-xl font-display">
+<span class="material-symbols-outlined text-[20px]">shield_with_heart</span> SECURE
+            </div>
+<div class="flex items-center gap-2 font-bold tracking-tighter text-xl font-display">
+<span class="material-symbols-outlined text-[20px]">bolt</span> FAST
+            </div>
+<div class="flex items-center gap-2 font-bold tracking-tighter text-xl font-display">
+<span class="material-symbols-outlined text-[20px]">monitoring</span> ANALYTIC
+            </div>
+</div>
+</div>
+</main>
+<footer class="w-full px-8 py-10 border-t border-border-gray mt-12 bg-white">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="text-[11px] text-text-muted tracking-widest uppercase font-display">
+            © 2024 OneVault Institutional. All rights reserved.
+        </div>
+<div class="flex gap-8 text-[11px] font-bold uppercase tracking-widest font-display">
+<a class="hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-primary transition-colors" href="#">Terms of Service</a>
+<a class="hover:text-primary transition-colors" href="#">Audit Reports</a>
+</div>
+</div>
+</footer>
+
+</body></html>

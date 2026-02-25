@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html class="" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>OneVault Admin - Vaults</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style type="text/tailwindcss">
+        :root {
+            --dark-navy: #0A192F;
+            --border-light: #E5E7EB;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#000000",
+                        "navy": "#0A192F",
+                        "background-light": "#FFFFFF",
+                        "background-dark": "#191919",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0px",
+                        "lg": "0px",
+                        "xl": "0px",
+                        "full": "0px"
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-white font-display text-black antialiased selection:bg-navy selection:text-white">
+<div class="relative flex h-screen w-full overflow-hidden bg-white">
+<aside class="flex w-64 flex-col justify-between border-r border-gray-100 bg-white p-6 hidden lg:flex">
+<div class="flex flex-col gap-8">
+<div class="flex items-center gap-3 py-2">
+<div class="h-8 w-8 rounded-full bg-gray-100 bg-cover bg-center border border-gray-200" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDC-ZOX351QIB3evjAhqJfyAsAvlg9JkHo3RJ3J7ILTKxnO4BEGdQCgWb7ofihrPApqDPFbEWyvxtsj-27a__KG63RkGldVECZ20x6eai_PaMNpM8-lAqgNbaUvvvzDamrIBF5pGi2n64AVfd1PDSCGrOLeu1NdEoXfQ-M1-FUbjRHbhiDxRUc7qFKDusvf5jAy2vxLqzZy051ePDPkzLbutZwhBNItcMLUH0WoU7drw587WPf_ekm25x0tcSr97nLTfIzw56Mm86M');"></div>
+<div class="flex flex-col">
+<h1 class="text-xs font-bold tracking-tight uppercase">OneVault</h1>
+<p class="text-[10px] text-gray-400 uppercase tracking-widest">Portfolio Admin</p>
+</div>
+</div>
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-2 py-2 text-gray-400 hover:text-black transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]">dashboard</span>
+<span class="text-xs font-medium uppercase tracking-wider">Overview</span>
+</a>
+<a class="flex items-center gap-3 px-2 py-2 text-black border-l-2 border-black" href="#">
+<span class="material-symbols-outlined text-[18px]">account_balance_wallet</span>
+<span class="text-xs font-bold uppercase tracking-wider">Vaults</span>
+</a>
+<a class="flex items-center gap-3 px-2 py-2 text-gray-400 hover:text-black transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]">swap_horiz</span>
+<span class="text-xs font-medium uppercase tracking-wider">Activity</span>
+</a>
+<a class="flex items-center gap-3 px-2 py-2 text-gray-400 hover:text-black transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]">settings</span>
+<span class="text-xs font-medium uppercase tracking-wider">Settings</span>
+</a>
+</nav>
+</div>
+<button class="flex w-full items-center justify-center gap-2 border border-black py-2 text-[10px] font-bold uppercase tracking-widest hover:bg-black hover:text-white transition-all">
+<span>Connect Wallet</span>
+</button>
+</aside>
+<main class="flex-1 flex flex-col h-full overflow-hidden">
+<div class="lg:hidden flex items-center justify-between p-4 border-b border-gray-100 bg-white">
+<span class="font-bold text-sm tracking-tighter uppercase">OneVault</span>
+<button class="text-black">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+<div class="flex-1 overflow-y-auto overflow-x-hidden p-6 md:p-10 lg:p-16">
+<div class="mx-auto max-w-6xl flex flex-col gap-12">
+<div class="flex flex-col gap-2 md:flex-row md:items-end md:justify-between border-b border-gray-100 pb-8">
+<div class="flex flex-col gap-1">
+<h1 class="text-2xl font-light tracking-tight text-black">My Vaults</h1>
+<p class="text-xs text-gray-400 uppercase tracking-widest">Institutional Portfolio Summary</p>
+</div>
+<div class="flex items-center gap-2 text-[10px] font-semibold tracking-widest text-gray-400 uppercase">
+<span class="inline-block h-1.5 w-1.5 rounded-full bg-green-500"></span>
+                            Live Market Feed
+                        </div>
+</div>
+<div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+<div class="border border-gray-200 p-8 flex flex-col gap-4">
+<div class="flex items-center justify-between">
+<span class="text-[10px] font-bold uppercase tracking-widest text-gray-400">Total Value Locked</span>
+<span class="material-symbols-outlined text-gray-300 text-sm">lock</span>
+</div>
+<div class="flex items-baseline gap-4">
+<span class="text-3xl font-light tracking-tighter">$1,240,500.00</span>
+<span class="text-[10px] font-bold text-green-600">+2.4%</span>
+</div>
+</div>
+<div class="border border-gray-200 p-8 flex flex-col gap-4">
+<div class="flex items-center justify-between">
+<span class="text-[10px] font-bold uppercase tracking-widest text-gray-400">Active Strategies</span>
+<span class="material-symbols-outlined text-gray-300 text-sm">grid_view</span>
+</div>
+<div class="flex items-baseline gap-4">
+<span class="text-3xl font-light tracking-tighter">08</span>
+<span class="text-[10px] font-bold text-gray-400 tracking-widest uppercase">Verified Protocols</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-6">
+<div class="flex items-center justify-between border-b border-gray-100 pb-4">
+<h2 class="text-xs font-bold uppercase tracking-widest text-black">Asset Allocations</h2>
+<button class="text-[10px] font-bold uppercase tracking-widest text-gray-400 hover:text-black flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">download</span> Export Statement
+                            </button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full min-w-[800px] border-collapse text-left">
+<thead>
+<tr class="border-b border-gray-200">
+<th class="pb-4 text-[10px] font-bold uppercase tracking-widest text-gray-400">Vault Position</th>
+<th class="pb-4 text-[10px] font-bold uppercase tracking-widest text-gray-400">Protocol</th>
+<th class="pb-4 text-[10px] font-bold uppercase tracking-widest text-gray-400 text-right">Balance (USDC)</th>
+<th class="pb-4 text-[10px] font-bold uppercase tracking-widest text-gray-400 text-right">Unrealized P&amp;L</th>
+<th class="pb-4 text-[10px] font-bold uppercase tracking-widest text-gray-400 text-right">APY</th>
+<th class="pb-4 text-[10px] font-bold uppercase tracking-widest text-gray-400 text-right"></th>
+</tr>
+</thead>
+<tbody class="divide-y divide-gray-50">
+<tr class="group hover:bg-gray-50/50 transition-colors">
+<td class="py-6">
+<div class="flex items-center gap-4">
+<div class="h-1 w-1 bg-black"></div>
+<div>
+<div class="text-sm font-semibold text-black tracking-tight">USDC-ETH LP</div>
+<div class="text-[10px] text-gray-400 font-medium">0.05% Fee Tier</div>
+</div>
+</div>
+</td>
+<td class="py-6">
+<span class="text-[10px] font-medium text-gray-500 uppercase tracking-wider">Uniswap V3</span>
+</td>
+<td class="py-6 text-right text-sm font-medium text-black">150,000.00</td>
+<td class="py-6 text-right">
+<span class="text-sm font-medium text-green-600">+4,200.00</span>
+</td>
+<td class="py-6 text-right">
+<span class="text-sm font-bold text-navy">12.50%</span>
+</td>
+<td class="py-6 text-right">
+<button class="bg-navy text-white text-[10px] font-bold uppercase tracking-widest px-6 py-2 transition-opacity hover:opacity-90">Manage</button>
+</td>
+</tr>
+<tr class="group hover:bg-gray-50/50 transition-colors">
+<td class="py-6">
+<div class="flex items-center gap-4">
+<div class="h-1 w-1 bg-black"></div>
+<div>
+<div class="text-sm font-semibold text-black tracking-tight">WBTC-USDC</div>
+<div class="text-[10px] text-gray-400 font-medium">Tricrypto Pool</div>
+</div>
+</div>
+</td>
+<td class="py-6">
+<span class="text-[10px] font-medium text-gray-500 uppercase tracking-wider">Curve</span>
+</td>
+<td class="py-6 text-right text-sm font-medium text-black">240,500.00</td>
+<td class="py-6 text-right">
+<span class="text-sm font-medium text-green-600">+1,150.00</span>
+</td>
+<td class="py-6 text-right">
+<span class="text-sm font-bold text-navy">8.20%</span>
+</td>
+<td class="py-6 text-right">
+<button class="bg-navy text-white text-[10px] font-bold uppercase tracking-widest px-6 py-2 transition-opacity hover:opacity-90">Manage</button>
+</td>
+</tr>
+<tr class="group hover:bg-gray-50/50 transition-colors">
+<td class="py-6">
+<div class="flex items-center gap-4">
+<div class="h-1 w-1 bg-black"></div>
+<div>
+<div class="text-sm font-semibold text-black tracking-tight">ETH-stETH</div>
+<div class="text-[10px] text-gray-400 font-medium">Liquid Staking</div>
+</div>
+</div>
+</td>
+<td class="py-6">
+<span class="text-[10px] font-medium text-gray-500 uppercase tracking-wider">Lido</span>
+</td>
+<td class="py-6 text-right text-sm font-medium text-black">500,000.00</td>
+<td class="py-6 text-right">
+<span class="text-sm font-medium text-green-600">+8,900.00</span>
+</td>
+<td class="py-6 text-right">
+<span class="text-sm font-bold text-navy">5.40%</span>
+</td>
+<td class="py-6 text-right">
+<button class="bg-navy text-white text-[10px] font-bold uppercase tracking-widest px-6 py-2 transition-opacity hover:opacity-90">Manage</button>
+</td>
+</tr>
+<tr class="group hover:bg-gray-50/50 transition-colors">
+<td class="py-6">
+<div class="flex items-center gap-4">
+<div class="h-1 w-1 bg-black"></div>
+<div>
+<div class="text-sm font-semibold text-black tracking-tight">DAI-USDC</div>
+<div class="text-[10px] text-gray-400 font-medium">Lending Pool</div>
+</div>
+</div>
+</td>
+<td class="py-6">
+<span class="text-[10px] font-medium text-gray-500 uppercase tracking-wider">Aave</span>
+</td>
+<td class="py-6 text-right text-sm font-medium text-black">200,000.00</td>
+<td class="py-6 text-right">
+<span class="text-sm font-medium text-green-600">+240.00</span>
+</td>
+<td class="py-6 text-right">
+<span class="text-sm font-bold text-navy">3.10%</span>
+</td>
+<td class="py-6 text-right">
+<button class="bg-navy text-white text-[10px] font-bold uppercase tracking-widest px-6 py-2 transition-opacity hover:opacity-90">Manage</button>
+</td>
+</tr>
+<tr class="group hover:bg-gray-50/50 transition-colors">
+<td class="py-6">
+<div class="flex items-center gap-4">
+<div class="h-1 w-1 bg-black"></div>
+<div>
+<div class="text-sm font-semibold text-black tracking-tight">LINK-ETH</div>
+<div class="text-[10px] text-gray-400 font-medium">80/20 Pool</div>
+</div>
+</div>
+</td>
+<td class="py-6">
+<span class="text-[10px] font-medium text-gray-500 uppercase tracking-wider">Balancer</span>
+</td>
+<td class="py-6 text-right text-sm font-medium text-black">150,000.00</td>
+<td class="py-6 text-right">
+<span class="text-sm font-medium text-red-600">-120.00</span>
+</td>
+<td class="py-6 text-right">
+<span class="text-sm font-bold text-navy">14.20%</span>
+</td>
+<td class="py-6 text-right">
+<button class="bg-navy text-white text-[10px] font-bold uppercase tracking-widest px-6 py-2 transition-opacity hover:opacity-90">Manage</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="flex items-center justify-between pt-8 border-t border-gray-100">
+<span class="text-[10px] text-gray-400 uppercase tracking-widest">Page 01 of 12</span>
+<div class="flex gap-4">
+<button class="text-[10px] font-bold uppercase tracking-widest text-gray-300 cursor-not-allowed">Prev</button>
+<button class="text-[10px] font-bold uppercase tracking-widest text-black hover:underline underline-offset-4">Next</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+
+</body></html>

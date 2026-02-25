@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html class="" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>OneVault | Private Bank Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0D0D0D",
+                        "navy": "#1B2A4A",
+                        "border-gray": "#E5E5E5",
+                        "background-light": "#FFFFFF",
+                        "slate-gray": "#64748B",
+                    },
+                    fontFamily: {
+                        "sans": ["Inter", "sans-serif"],
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0px",
+                        "lg": "0px",
+                        "xl": "0px",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        @layer base {
+            body {
+                @apply font-sans text-primary bg-background-light antialiased;
+            }
+            h1, h2, h3, h4 {
+                @apply font-bold tracking-tight;
+            }
+        }
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FFFFFF;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #E5E5E5;
+        }
+        .sidebar-link {
+            @apply flex items-center gap-3 px-8 py-3 text-slate-gray hover:text-primary transition-all duration-200 text-sm font-medium border-r-2 border-transparent;
+        }
+        .sidebar-link.active {
+            @apply text-primary bg-gray-50 border-r-2 border-navy;
+        }
+        .metric-card {
+            @apply p-8 border border-border-gray bg-white flex flex-col gap-4;
+        }
+    </style>
+</head>
+<body class="overflow-hidden flex flex-col h-screen">
+<header class="w-full border-b border-[#E5E5E5] bg-white shrink-0 z-50">
+<div class="max-w-[1200px] mx-auto flex items-center justify-between px-6 py-4">
+<div class="flex items-center gap-10">
+<a class="flex items-center gap-2" href="index.html">
+<span class="material-symbols-outlined text-primary text-2xl">account_balance</span>
+<span class="font-bold text-xl tracking-tight font-display">OneVault</span>
+</a>
+<nav class="hidden md:flex items-center gap-8 text-sm font-medium">
+<a class="text-slate-500 hover:text-primary transition-colors font-display" href="allocator.html">Allocate</a>
+<a class="text-slate-500 hover:text-primary transition-colors font-display" href="discover.html">Discover</a>
+<a class="text-primary border-b-2 border-primary pb-0.5 font-display" href="portfolio_admin_-_main.html">Portfolio</a>
+</nav>
+</div>
+<div class="flex items-center gap-6">
+<button class="bg-primary text-white text-xs font-bold uppercase tracking-widest px-5 py-2.5 hover:bg-slate-800 transition-colors font-display">
+                Connect Wallet
+            </button>
+</div>
+</div>
+</header>
+<div class="flex flex-1 w-full flex-row overflow-hidden">
+<aside class="hidden lg:flex w-64 flex-col border-r border-border-gray bg-white h-full shrink-0">
+<div class="flex h-full flex-col justify-between py-10">
+<div class="flex flex-col gap-12">
+<div class="px-8">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-navy text-2xl">account_balance</span>
+<div class="flex flex-col">
+<span class="text-primary text-sm font-bold tracking-widest uppercase">OneVault</span>
+<span class="text-[9px] text-slate-gray font-medium tracking-[0.2em] uppercase">Private Wealth</span>
+</div>
+</div>
+</div>
+<nav class="flex flex-col">
+<a class="sidebar-link active" href="#">
+<span class="material-symbols-outlined text-[20px]">grid_view</span>
+<span>Portfolio</span>
+</a>
+<a class="sidebar-link" href="portfolio_admin_-_vaults_tab.html">
+<span class="material-symbols-outlined text-[20px]">account_balance_wallet</span>
+<span>Vaults</span>
+</a>
+<a class="sidebar-link" href="portfolio_admin_-_transactions_tab.html">
+<span class="material-symbols-outlined text-[20px]">history</span>
+<span>Activity</span>
+</a>
+<a class="sidebar-link" href="portfolio_admin_-_strategy_builder_tab.html">
+<span class="material-symbols-outlined text-[20px]">smart_toy</span>
+<span>Agentic</span>
+</a>
+<a class="sidebar-link" href="portfolio_admin_-_settings_tab.html">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+<span>Settings</span>
+</a>
+</nav>
+</div>
+<div class="px-8 flex flex-col gap-8">
+<div class="pt-8 border-t border-border-gray">
+<p class="text-[10px] font-bold text-primary uppercase tracking-widest mb-3">Advisor</p>
+<div class="flex items-center gap-3">
+<div class="size-8 bg-gray-50 flex items-center justify-center border border-border-gray">
+<span class="material-symbols-outlined text-sm text-slate-gray">person</span>
+</div>
+<div>
+<p class="text-[11px] text-primary font-bold">M. Henderson</p>
+<p class="text-[9px] text-slate-gray font-medium">Senior Partner</p>
+</div>
+</div>
+</div>
+<button class="flex items-center gap-2 text-slate-gray hover:text-primary transition-colors text-xs font-medium">
+<span class="material-symbols-outlined text-[18px]">logout</span>
+<span>End Session</span>
+</button>
+</div>
+</div>
+</aside>
+<main class="flex-1 flex flex-col h-full overflow-hidden bg-white">
+<header class="h-20 border-b border-border-gray flex items-center justify-between px-8 md:px-12 shrink-0">
+<div class="flex flex-col">
+<h2 class="text-lg font-bold text-primary tracking-tight">Portfolio Overview</h2>
+<p class="text-[10px] text-slate-gray font-medium uppercase tracking-widest">Client ID: OV-882910</p>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden md:flex flex-col items-end">
+<p class="text-[10px] text-slate-gray font-medium uppercase tracking-widest">Last Synced</p>
+<p class="text-xs text-primary font-medium">Jan 24, 2024 • 14:30 GMT</p>
+</div>
+<button class="bg-navy text-white px-6 py-2.5 text-[10px] font-bold uppercase tracking-[0.15em] hover:bg-opacity-90 transition-all">
+                        Refresh Data
+                    </button>
+</div>
+</header>
+<div class="flex-1 overflow-y-auto p-8 md:p-12">
+<div class="max-w-6xl mx-auto space-y-12">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-0">
+<div class="metric-card border-r-0">
+<span class="text-[10px] text-slate-gray font-bold uppercase tracking-[0.2em]">Total Portfolio Value</span>
+<div class="flex flex-col gap-1">
+<h3 class="text-3xl font-bold text-primary">$1,254,300.00</h3>
+<div class="flex items-center gap-1 text-[11px] font-bold text-navy">
+<span class="material-symbols-outlined text-xs">north</span>
+                                    2.41% <span class="font-medium text-slate-gray ml-1">vs Last Month</span>
+</div>
+</div>
+</div>
+<div class="metric-card border-r-0">
+<span class="text-[10px] text-slate-gray font-bold uppercase tracking-[0.2em]">Accrued Yield</span>
+<div class="flex flex-col gap-1">
+<h3 class="text-3xl font-bold text-primary">+$45,230.50</h3>
+<div class="flex items-center gap-1 text-[11px] font-bold text-navy">
+<span class="material-symbols-outlined text-xs">trending_up</span>
+                                    $2,104.12 <span class="font-medium text-slate-gray ml-1">Daily Avg</span>
+</div>
+</div>
+</div>
+<div class="metric-card">
+<span class="text-[10px] text-slate-gray font-bold uppercase tracking-[0.2em]">Net APY</span>
+<div class="flex flex-col gap-1">
+<h3 class="text-3xl font-bold text-primary">12.42%</h3>
+<div class="flex items-center gap-1 text-[11px] font-bold text-slate-gray">
+<span class="material-symbols-outlined text-xs">analytics</span>
+                                    Benchmark: 8.2%
+                                </div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-16">
+<div class="xl:col-span-5">
+<div class="mb-10 pb-4 border-b border-border-gray flex justify-between items-end">
+<h4 class="text-[10px] font-bold text-primary uppercase tracking-[0.2em]">Asset Allocation</h4>
+<span class="text-[10px] text-slate-gray font-bold uppercase tracking-widest">Institutional Weighting</span>
+</div>
+<div class="flex flex-col md:flex-row items-center gap-12">
+<div class="relative w-48 h-48 shrink-0">
+<svg class="w-full h-full -rotate-90" viewBox="0 0 36 36">
+<circle cx="18" cy="18" fill="transparent" r="16" stroke="#E5E5E5" stroke-width="3"></circle>
+<circle cx="18" cy="18" fill="transparent" r="16" stroke="#1B2A4A" stroke-dasharray="35 65" stroke-dashoffset="0" stroke-width="3"></circle>
+<circle cx="18" cy="18" fill="transparent" r="16" stroke="#64748B" stroke-dasharray="25 75" stroke-dashoffset="-35" stroke-width="3"></circle>
+<circle cx="18" cy="18" fill="transparent" r="16" stroke="#78350F" stroke-dasharray="25 75" stroke-dashoffset="-60" stroke-width="3"></circle>
+<circle cx="18" cy="18" fill="transparent" r="16" stroke="#F1F5F9" stroke-dasharray="15 85" stroke-dashoffset="-85" stroke-width="3"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="text-[10px] uppercase font-bold text-slate-gray tracking-wider">AUM</span>
+<span class="text-lg font-bold text-primary">$1.25M</span>
+</div>
+</div>
+<div class="w-full space-y-4">
+<div class="flex items-center justify-between py-1 border-b border-gray-50">
+<div class="flex items-center gap-2">
+<div class="size-1.5 bg-navy"></div>
+<span class="text-xs font-medium text-slate-gray">Delta Neutral</span>
+</div>
+<span class="text-xs font-bold text-primary">35%</span>
+</div>
+<div class="flex items-center justify-between py-1 border-b border-gray-50">
+<div class="flex items-center gap-2">
+<div class="size-1.5 bg-slate-gray"></div>
+<span class="text-xs font-medium text-slate-gray">Yield Strategies</span>
+</div>
+<span class="text-xs font-bold text-primary">25%</span>
+</div>
+<div class="flex items-center justify-between py-1 border-b border-gray-50">
+<div class="flex items-center gap-2">
+<div class="size-1.5 bg-amber-900"></div>
+<span class="text-xs font-medium text-slate-gray">Lending Markets</span>
+</div>
+<span class="text-xs font-bold text-primary">25%</span>
+</div>
+<div class="flex items-center justify-between py-1 border-b border-gray-50">
+<div class="flex items-center gap-2">
+<div class="size-1.5 bg-gray-200"></div>
+<span class="text-xs font-medium text-slate-gray">Core Holdings</span>
+</div>
+<span class="text-xs font-bold text-primary">15%</span>
+</div>
+</div>
+</div>
+</div>
+<div class="xl:col-span-7">
+<div class="mb-6 flex justify-between items-end border-b border-border-gray pb-4">
+<h4 class="text-[10px] font-bold text-primary uppercase tracking-[0.2em]">Active Positions</h4>
+<button class="text-[10px] text-navy font-bold uppercase tracking-widest hover:underline">Download Statements</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="border-b border-primary">
+<th class="py-4 text-[10px] font-bold text-primary uppercase tracking-[0.15em]">Vault Strategy</th>
+<th class="py-4 text-[10px] font-bold text-primary uppercase tracking-[0.15em] text-right">Balance</th>
+<th class="py-4 text-[10px] font-bold text-primary uppercase tracking-[0.15em] text-right">Allocation (%)</th>
+<th class="py-4 text-[10px] font-bold text-primary uppercase tracking-[0.15em] text-right">30d APY</th>
+<th class="py-4 text-[10px] font-bold text-primary uppercase tracking-[0.15em] text-right">Lifetime Earned</th>
+<th class="py-4 text-[10px] font-bold text-primary uppercase tracking-[0.15em] text-center">Operation</th>
+</tr>
+</thead>
+<tbody class="text-xs">
+<tr class="border-b border-border-gray hover:bg-gray-50 transition-colors">
+<td class="py-6 pr-4">
+<p class="font-bold text-primary">USDC-ETH LP Vault</p>
+<p class="text-[10px] text-slate-gray font-medium">Uniswap V3 High Vol</p>
+</td>
+<td class="py-6 text-right font-medium text-slate-gray">$52,100.00</td>
+<td class="py-6 text-right font-medium text-slate-gray">4.15%</td>
+<td class="py-6 text-right font-bold text-primary">18.2%</td>
+<td class="py-6 text-right font-bold text-primary">$1,240.20</td>
+<td class="py-6 text-center pl-4">
+<button class="border border-navy text-navy px-4 py-2 text-[10px] font-bold uppercase tracking-widest hover:bg-navy hover:text-white transition-all">Adjust</button>
+</td>
+</tr>
+<tr class="border-b border-border-gray hover:bg-gray-50 transition-colors">
+<td class="py-6 pr-4">
+<p class="font-bold text-primary">Curve 3Pool Stable</p>
+<p class="text-[10px] text-slate-gray font-medium">Low Risk Stablecoins</p>
+</td>
+<td class="py-6 text-right font-medium text-slate-gray">$101,250.00</td>
+<td class="py-6 text-right font-medium text-slate-gray">8.07%</td>
+<td class="py-6 text-right font-bold text-primary">4.5%</td>
+<td class="py-6 text-right font-bold text-primary">$3,150.80</td>
+<td class="py-6 text-center pl-4">
+<button class="border border-navy text-navy px-4 py-2 text-[10px] font-bold uppercase tracking-widest hover:bg-navy hover:text-white transition-all">Adjust</button>
+</td>
+</tr>
+<tr class="border-b border-border-gray hover:bg-gray-50 transition-colors">
+<td class="py-6 pr-4">
+<p class="font-bold text-primary">Aave USDC Market</p>
+<p class="text-[10px] text-slate-gray font-medium">V3 Institutional Supply</p>
+</td>
+<td class="py-6 text-right font-medium text-slate-gray">$250,900.00</td>
+<td class="py-6 text-right font-medium text-slate-gray">20.00%</td>
+<td class="py-6 text-right font-bold text-primary">6.8%</td>
+<td class="py-6 text-right font-bold text-primary">$8,920.45</td>
+<td class="py-6 text-center pl-4">
+<button class="border border-navy text-navy px-4 py-2 text-[10px] font-bold uppercase tracking-widest hover:bg-navy hover:text-white transition-all">Adjust</button>
+</td>
+</tr>
+<tr class="border-b border-border-gray hover:bg-gray-50 transition-colors">
+<td class="py-6 pr-4">
+<p class="font-bold text-primary">GMX GLP Strategy</p>
+<p class="text-[10px] text-slate-gray font-medium">Multi-Asset Index</p>
+</td>
+<td class="py-6 text-right font-medium text-slate-gray">$78,400.00</td>
+<td class="py-6 text-right font-medium text-slate-gray">6.25%</td>
+<td class="py-6 text-right font-bold text-primary">22.4%</td>
+<td class="py-6 text-right font-bold text-primary">$4,560.10</td>
+<td class="py-6 text-center pl-4">
+<button class="border border-navy text-navy px-4 py-2 text-[10px] font-bold uppercase tracking-widest hover:bg-navy hover:text-white transition-all">Adjust</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="mt-8 flex justify-between items-center border-t border-border-gray pt-6">
+<span class="text-[10px] text-slate-gray font-bold uppercase tracking-widest">Showing 4 of 12 strategies</span>
+<div class="flex gap-8">
+<button class="text-[10px] font-bold text-primary uppercase tracking-widest hover:text-navy transition-colors">Previous</button>
+<button class="text-[10px] font-bold text-primary uppercase tracking-widest hover:text-navy transition-colors">Next Page</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+
+</body></html>
