@@ -77,11 +77,6 @@
 <h2 class="text-4xl font-bold mb-2 tracking-tight font-display">Discover Yield</h2>
 <p class="text-slate-500 text-sm max-w-md font-normal font-display">Curated liquid investment strategies for institutional-grade capital management.</p>
 </div>
-<div class="flex gap-10 mt-6 md:mt-0">
-<button class="text-sm font-bold border-b-2 border-primary pb-4 -mb-[18px] font-display">Pools</button>
-<button class="text-sm font-medium text-slate-400 pb-4 -mb-[18px] hover:text-slate-600 font-display">Strategies</button>
-<button class="text-sm font-medium text-slate-400 pb-4 -mb-[18px] hover:text-slate-600 font-display">Assets</button>
-</div>
 </div>
 
 <!-- Featured vaults (data-driven) -->
@@ -245,7 +240,7 @@ function applyFilters(vaults, f) {
 
 function renderFeatured() {
   document.getElementById("featured-grid").innerHTML = FEATURED.map(f => `
-    <div class="navy-bg text-white p-8 flex flex-col justify-between relative overflow-hidden rounded-lg min-h-[480px]">
+    <div class="navy-bg text-white p-8 flex flex-col justify-between relative overflow-hidden rounded-lg min-h-[336px]">
       <div class="z-10">
         <span class="text-[10px] font-bold uppercase tracking-[0.3em] opacity-70 mb-4 block font-display">${f.label}</span>
         <h3 class="text-4xl font-bold mb-4 leading-tight tracking-tight text-white font-display">${f.name}</h3>
