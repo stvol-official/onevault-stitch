@@ -2,7 +2,8 @@
 // To add a vault: append one object to this array.
 // Fields: name, curator, asset, apy (number), tvlRaw (number USD),
 //         tvlDisplay (string), risk (string), riskTier ("low"|"medium"|"high"),
-//         icon (HTML string), link (string)
+//         icon (HTML string), link (string),
+//         balance (number, optional) — demo deposited USDC balance for Remove tab
 
 const VAULTS = [
   {
@@ -16,6 +17,7 @@ const VAULTS = [
     riskTier: "low",
     icon: '<img alt="ETH" class="w-6 h-6" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4iT1QGgk9YSPhDhuTxTnweEPErmG-iAXtRcvH3cyR4icBZWW-NkKYeVf-co5gHJcfB18X-R3p6vYyiVI69szuD3_ebLLWJdZfR75R-uX99YYZw3dscYsUrKM8cpsfkRsAcnUeklFVKY-TCC_U5V7cjbrDWLadhVWidD-ceCJ9eUInQG9V6YYn5PV2U9bPP73kNS93wwo43zhGF3wCgjj0W8k9f1gGqSdAsfztSrPmRMxM0zy3vzcpm-0IPDSCF-ZKtpMoO6OP4A0"/>',
     link: "vault_detail.html",
+    balance: 50,
   },
   {
     name: "Circle Yield Plus",
@@ -40,6 +42,7 @@ const VAULTS = [
     riskTier: "low",
     icon: '<span class="text-xs font-bold text-purple-600">AV</span>',
     link: "vault_detail.html",
+    balance: 250,
   },
   {
     name: "BlackRock BUIDL",
@@ -100,6 +103,7 @@ const VAULTS = [
     riskTier: "medium",
     icon: '<span class="text-xs font-bold text-green-600">MF</span>',
     link: "vault_detail.html",
+    balance: 175,
   },
   {
     name: "Gauntlet USDC Frontier",
@@ -112,6 +116,7 @@ const VAULTS = [
     riskTier: "medium",
     icon: '<span class="text-xs font-bold text-blue-600">GU</span>',
     link: "vault_detail.html",
+    balance: 100,
   },
   {
     name: "Clearpool USDC",

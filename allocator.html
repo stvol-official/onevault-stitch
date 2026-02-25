@@ -209,7 +209,7 @@
 <img alt="USDC" class="w-3.5 h-3.5" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAP1R2mXvfdAM4XtNoPhDrD2ZovjemD1kqxfJvCCIdyvvEDK3zFu8QhedvKveiPT3-Q8Ait7DuLZ4qfafT8AHBUnk5w6MJ1XQYxhr9kKL2EyVTqiK_jXJfPcwMeCdpkWDw7UlcKhQh1i8TFJQ2d88u6pS-Jeqdj-nrYhZNRlmdP2Z0tPcIZwE49dt-Mut-AVhbVoftPNnTmJMlJaf704mkOlLG0ABwiwAFKRi66Urvnk31gNe-CQAo3swrNQUquySjGxx0Z9I5VHvc"/>
 <span class="text-xs text-gray-400 dark:text-gray-500">Deposited USDC</span>
 </div>
-<span class="text-sm font-bold">10.01 USDC</span>
+<span id="remove-info-balance" class="text-sm font-bold"></span>
 </div>
 </div>
 
@@ -224,13 +224,13 @@
 </div>
 <div class="relative">
 <input id="remove-amount-input" class="w-full bg-transparent border border-border-light dark:border-border-dark p-4 pr-24 rounded-lg focus:ring-1 focus:ring-primary dark:focus:ring-white focus:border-primary dark:focus:border-white outline-none text-xl font-medium transition-all" placeholder="0.0" type="text"/>
-<button onclick="document.getElementById('remove-amount-input').value='10.01'"
+<button onclick="document.getElementById('remove-amount-input').value=selectedRemoveVault.balance.toFixed(2)"
   class="absolute right-3 top-1/2 -translate-y-1/2 text-[11px] font-bold uppercase tracking-widest text-primary dark:text-white border border-border-light dark:border-border-dark px-3 py-1.5 rounded hover:bg-gray-50 dark:hover:bg-white/5 transition-colors">
     Use Max
 </button>
 </div>
 <div class="flex justify-between text-[11px] text-gray-400 dark:text-gray-500 px-1">
-<span>Deposited: 10.01 USDC</span>
+<span id="remove-deposited-label">Deposited: 0.00 USDC</span>
 <span>Wallet: 808.67 USDC</span>
 </div>
 </div>
@@ -449,14 +449,20 @@ function renderRemoveVaultCard() {
     </div>
   `;
   // Update vault info panel
+  const bal = (v.balance || 0).toFixed(2);
   document.getElementById("remove-info-name").textContent    = v.name;
   document.getElementById("remove-info-curator").textContent = `Curated by ${v.curator}`;
   document.getElementById("remove-info-tvl").textContent     = v.tvlDisplay;
+  document.getElementById("remove-info-balance").textContent = bal + " USDC";
+  document.getElementById("remove-deposited-label").textContent = "Deposited: " + bal + " USDC";
 }
 
 function renderRemoveDropdownList() {
-  document.getElementById("remove-vault-dropdown-list").innerHTML = VAULTS.map((v, i) => `
-    <div data-ridx="${i}"
+  const depositedVaults = VAULTS.filter(v => v.balance > 0);
+  document.getElementById("remove-vault-dropdown-list").innerHTML = depositedVaults.map((v) => {
+    const origIdx = VAULTS.indexOf(v);
+    return `
+    <div data-ridx="${origIdx}"
       class="flex items-center justify-between px-4 py-3 cursor-pointer hover:bg-gray-50 dark:hover:bg-white/5 transition-colors
              ${v.name === selectedRemoveVault.name ? "bg-gray-50 dark:bg-white/[0.04]" : ""}">
       <div class="flex items-center gap-3">
@@ -469,12 +475,13 @@ function renderRemoveDropdownList() {
         </div>
       </div>
       <div class="flex items-center gap-2 shrink-0">
+        <span class="text-sm font-bold text-accent-green">${v.balance.toFixed(2)} USDC</span>
         ${v.name === selectedRemoveVault.name
           ? '<span class="material-symbols-outlined text-accent-green text-base">check</span>'
           : ""}
       </div>
     </div>
-  `).join("");
+  `}).join("");
 
   document.getElementById("remove-vault-dropdown-list").onclick = e => {
     const item = e.target.closest("[data-ridx]");
@@ -504,7 +511,7 @@ function closeRemoveDropdown() {
 
 // ─── Init ────────────────────────────────────────────────────────────────
 selectedVault       = VAULTS.find(v => v.name === "Gauntlet USDC Frontier") || VAULTS[0];
-selectedRemoveVault = VAULTS.find(v => v.name === "Gauntlet USDC Frontier") || VAULTS[0];
+selectedRemoveVault = VAULTS.find(v => v.balance > 0) || VAULTS[0];
 
 renderAutoMode();
 renderVaultCard();
