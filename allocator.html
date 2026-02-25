@@ -8,6 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
 <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+<script src="vaults-data.js"></script>
 <script>
     tailwind.config = {
         darkMode: "class",
@@ -97,35 +98,60 @@
 </div>
 
 <div class="space-y-6">
+
+<!-- Allocation Mode toggle -->
 <div class="flex items-center justify-between">
 <label class="text-xs font-semibold uppercase tracking-wider text-gray-400 dark:text-gray-500">Allocation Mode</label>
 <div class="flex bg-gray-50 dark:bg-[#1a1a1a] p-1 rounded">
-<button class="px-4 py-1 text-xs font-medium text-gray-400 dark:text-gray-600">Auto</button>
-<button class="px-4 py-1 text-xs font-medium bg-white dark:bg-border-dark text-primary dark:text-white shadow-sm rounded">Manual</button>
+<button id="btn-auto" onclick="setMode('auto')"
+  class="px-4 py-1 text-xs font-medium rounded transition-all">Auto</button>
+<button id="btn-manual" onclick="setMode('manual')"
+  class="px-4 py-1 text-xs font-medium rounded transition-all">Manual</button>
 </div>
 </div>
 
-<div class="group relative cursor-pointer border border-border-light dark:border-border-dark p-4 rounded-lg hover:border-gray-400 dark:hover:border-gray-600 transition-all">
-<div class="flex items-center justify-between">
-<div class="flex items-center gap-3">
-<div class="w-8 h-8 rounded-full bg-accent-green/10 flex items-center justify-center">
-<span class="material-symbols-outlined text-accent-green text-lg">trending_up</span>
+<!-- Auto mode: APY summary + vault tooltip -->
+<div id="section-auto" class="hidden">
+<div class="border border-border-light dark:border-border-dark rounded-lg p-5 space-y-3 bg-gray-50/50 dark:bg-white/[0.02]">
+<div class="flex items-end gap-2">
+<span id="auto-apy" class="text-4xl font-bold text-accent-green"></span>
+<div class="mb-1 space-y-0.5">
+<p class="text-[10px] font-semibold uppercase tracking-widest text-gray-400 dark:text-gray-500 leading-none">APY</p>
+<p class="text-[11px] text-gray-400 dark:text-gray-500 flex items-center gap-1">
+  On USDC deposits
+  <img alt="USDC" class="w-3 h-3 grayscale opacity-60" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCKot8_D-kw8PYhfLQhw5pVPGnYQSSG2S_tLQQe-JrbKCAcg5ph5B3ejObcjk442i7KkwJ2ph8k7AdqqY0H-A7P4nVfSmHuAnUy6H9gpM4_cvuRg4QSPtv0MGRbUHAgWpyim0IHz8P9J8jzzS70XE8OOz1h90B42OagVVjDl7kQgNSudZBZudCoDkUJ-5C6-O7UVHnVsCfFwAzRa2NH0z--reejrwmWIK_oN0G3zjghtAaJwU2pMW2cXJzQyHJai_fWHYEKI_HBG-g"/>
+</p>
 </div>
-<div>
+</div>
+<!-- Vault tooltip -->
+<div id="auto-vault-info" class="flex items-center justify-between pt-3 border-t border-border-light dark:border-border-dark">
 <div class="flex items-center gap-2">
-<h3 class="text-sm font-semibold">Gauntlet USDC Frontier</h3>
-<span class="text-[10px] font-bold bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 px-1.5 py-0.5 rounded border border-blue-100 dark:border-blue-800">V2</span>
+<span class="material-symbols-outlined text-accent-green text-base">auto_awesome</span>
+<div>
+<p id="auto-vault-name" class="text-xs font-semibold"></p>
+<p id="auto-vault-meta" class="text-[10px] text-gray-400 dark:text-gray-500"></p>
 </div>
-<p class="text-[11px] text-gray-400 dark:text-gray-500">Gauntlet • $3.6M TVL</p>
 </div>
-</div>
-<div class="flex items-center gap-3">
-<span class="text-sm font-bold text-accent-green">4.32%</span>
-<span class="material-symbols-outlined text-gray-400">expand_more</span>
+<span class="text-[10px] font-bold uppercase tracking-widest text-gray-300 dark:text-gray-600">Best Pick</span>
 </div>
 </div>
 </div>
 
+<!-- Manual mode: vault dropdown -->
+<div id="section-manual" class="hidden">
+<div class="relative" id="vault-selector-wrapper">
+<div id="vault-selector-card"
+  onclick="toggleDropdown()"
+  class="cursor-pointer border border-border-light dark:border-border-dark p-4 rounded-lg hover:border-gray-400 dark:hover:border-gray-600 transition-all select-none">
+</div>
+<div id="vault-dropdown"
+  class="hidden absolute top-full left-0 right-0 z-20 mt-1 border border-border-light dark:border-border-dark bg-white dark:bg-card-dark rounded-lg shadow-lg overflow-hidden">
+<div class="max-h-64 overflow-y-auto divide-y divide-border-light dark:divide-border-dark" id="vault-dropdown-list"></div>
+</div>
+</div>
+</div>
+
+<!-- Amount input -->
 <div class="space-y-2">
 <div class="flex justify-between">
 <label class="text-xs font-semibold uppercase tracking-wider text-gray-400 dark:text-gray-500">Amount</label>
@@ -135,8 +161,9 @@
 </div>
 </div>
 <div class="relative">
-<input class="w-full bg-transparent border border-border-light dark:border-border-dark p-4 pr-24 rounded-lg focus:ring-1 focus:ring-primary dark:focus:ring-white focus:border-primary dark:focus:border-white outline-none text-xl font-medium transition-all" placeholder="0.0" type="text"/>
-<button class="absolute right-3 top-1/2 -translate-y-1/2 text-[11px] font-bold uppercase tracking-widest text-primary dark:text-white border border-border-light dark:border-border-dark px-3 py-1.5 rounded hover:bg-gray-50 dark:hover:bg-white/5 transition-colors">
+<input id="amount-input" class="w-full bg-transparent border border-border-light dark:border-border-dark p-4 pr-24 rounded-lg focus:ring-1 focus:ring-primary dark:focus:ring-white focus:border-primary dark:focus:border-white outline-none text-xl font-medium transition-all" placeholder="0.0" type="text"/>
+<button onclick="document.getElementById('amount-input').value='808.67'"
+  class="absolute right-3 top-1/2 -translate-y-1/2 text-[11px] font-bold uppercase tracking-widest text-primary dark:text-white border border-border-light dark:border-border-dark px-3 py-1.5 rounded hover:bg-gray-50 dark:hover:bg-white/5 transition-colors">
     Use Max
 </button>
 </div>
@@ -190,5 +217,143 @@ Morpho <span class="mx-1 opacity-40">on</span> Base
 <span class="material-symbols-outlined dark:hidden">dark_mode</span>
 <span class="material-symbols-outlined hidden dark:block">light_mode</span>
 </button>
+
+<script>
+// ─── State ──────────────────────────────────────────────────────────────
+let mode = "auto";  // "auto" | "manual"
+let selectedVault = null;
+let dropdownOpen = false;
+
+// Best vault = highest APY in shared VAULTS list
+const bestVault = VAULTS.reduce((a, b) => (a.apy > b.apy ? a : b));
+
+// ─── Mode toggle ─────────────────────────────────────────────────────────
+function setMode(m) {
+  mode = m;
+
+  const btnAuto   = document.getElementById("btn-auto");
+  const btnManual = document.getElementById("btn-manual");
+  const secAuto   = document.getElementById("section-auto");
+  const secManual = document.getElementById("section-manual");
+
+  const activeClass   = ["bg-white", "dark:bg-border-dark", "text-primary", "dark:text-white", "shadow-sm"];
+  const inactiveClass = ["text-gray-400", "dark:text-gray-600"];
+
+  if (m === "auto") {
+    btnAuto.classList.add(...activeClass);
+    btnAuto.classList.remove(...inactiveClass);
+    btnManual.classList.remove(...activeClass);
+    btnManual.classList.add(...inactiveClass);
+    secAuto.classList.remove("hidden");
+    secManual.classList.add("hidden");
+  } else {
+    btnManual.classList.add(...activeClass);
+    btnManual.classList.remove(...inactiveClass);
+    btnAuto.classList.remove(...activeClass);
+    btnAuto.classList.add(...inactiveClass);
+    secManual.classList.remove("hidden");
+    secAuto.classList.add("hidden");
+  }
+}
+
+// ─── Auto mode ───────────────────────────────────────────────────────────
+function renderAutoMode() {
+  document.getElementById("auto-apy").textContent       = bestVault.apy.toFixed(2) + "%";
+  document.getElementById("auto-vault-name").textContent = bestVault.name;
+  document.getElementById("auto-vault-meta").textContent =
+    `${bestVault.curator} · ${bestVault.tvlDisplay} TVL`;
+}
+
+// ─── Manual mode: vault card ─────────────────────────────────────────────
+function renderVaultCard() {
+  const v = selectedVault;
+  document.getElementById("vault-selector-card").innerHTML = `
+    <div class="flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-full bg-accent-green/10 dark:bg-accent-green/5 flex items-center justify-center shrink-0">
+          ${v.icon}
+        </div>
+        <div>
+          <p class="text-sm font-semibold">${v.name}</p>
+          <p class="text-[11px] text-gray-400 dark:text-gray-500">${v.curator} · ${v.tvlDisplay} TVL</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-3 shrink-0">
+        <span class="text-sm font-bold text-accent-green">${v.apy.toFixed(2)}%</span>
+        <span class="material-symbols-outlined text-gray-400 transition-transform duration-200" id="dropdown-chevron">
+          expand_more
+        </span>
+      </div>
+    </div>
+  `;
+}
+
+// ─── Manual mode: dropdown list ──────────────────────────────────────────
+function renderDropdownList() {
+  document.getElementById("vault-dropdown-list").innerHTML = VAULTS.map((v, i) => `
+    <div data-idx="${i}"
+      class="flex items-center justify-between px-4 py-3 cursor-pointer hover:bg-gray-50 dark:hover:bg-white/5 transition-colors
+             ${v.name === selectedVault.name ? "bg-gray-50 dark:bg-white/[0.04]" : ""}">
+      <div class="flex items-center gap-3">
+        <div class="w-7 h-7 rounded-full bg-slate-100 dark:bg-white/10 flex items-center justify-center shrink-0">
+          ${v.icon}
+        </div>
+        <div>
+          <p class="text-sm font-medium">${v.name}</p>
+          <p class="text-[10px] text-gray-400 dark:text-gray-500">${v.curator} · ${v.tvlDisplay}</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-2 shrink-0">
+        <span class="text-sm font-bold text-accent-green">${v.apy.toFixed(2)}%</span>
+        ${v.name === selectedVault.name
+          ? '<span class="material-symbols-outlined text-accent-green text-base">check</span>'
+          : ""}
+      </div>
+    </div>
+  `).join("");
+
+  // Event delegation
+  document.getElementById("vault-dropdown-list").onclick = e => {
+    const item = e.target.closest("[data-idx]");
+    if (!item) return;
+    selectedVault = VAULTS[parseInt(item.dataset.idx)];
+    renderVaultCard();
+    renderDropdownList();
+    closeDropdown();
+  };
+}
+
+// ─── Dropdown open/close ─────────────────────────────────────────────────
+function toggleDropdown() {
+  dropdownOpen ? closeDropdown() : openDropdown();
+}
+
+function openDropdown() {
+  dropdownOpen = true;
+  document.getElementById("vault-dropdown").classList.remove("hidden");
+  const chevron = document.getElementById("dropdown-chevron");
+  if (chevron) chevron.style.transform = "rotate(180deg)";
+}
+
+function closeDropdown() {
+  dropdownOpen = false;
+  document.getElementById("vault-dropdown").classList.add("hidden");
+  const chevron = document.getElementById("dropdown-chevron");
+  if (chevron) chevron.style.transform = "";
+}
+
+document.addEventListener("click", e => {
+  const wrapper = document.getElementById("vault-selector-wrapper");
+  if (wrapper && !wrapper.contains(e.target)) closeDropdown();
+});
+
+// ─── Init ────────────────────────────────────────────────────────────────
+selectedVault = VAULTS.find(v => v.name === "Gauntlet USDC Frontier") || VAULTS[0];
+
+renderAutoMode();
+renderVaultCard();
+renderDropdownList();
+setMode("auto");  // start in Auto mode
+</script>
 
 </body></html>
