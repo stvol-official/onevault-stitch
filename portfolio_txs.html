@@ -2,10 +2,10 @@
 <html class="" lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>OneVault - Transactions</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<title>OneVault | Activity</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
@@ -14,17 +14,17 @@
                     colors: {
                         "primary": "#0D0D0D",
                         "navy": "#1B2A4A",
-                        "background-light": "#FFFFFF",
                         "border-gray": "#E5E5E5",
+                        "background-light": "#FFFFFF",
                         "slate-gray": "#64748B",
                     },
                     fontFamily: {
-                        "display": ["Inter", "sans-serif"]
+                        "sans": ["Inter", "sans-serif"],
                     },
                     borderRadius: {
-                        "DEFAULT": "0rem",
-                        "lg": "0rem",
-                        "xl": "0rem",
+                        "DEFAULT": "0px",
+                        "lg": "0px",
+                        "xl": "0px",
                         "full": "9999px"
                     },
                 },
@@ -32,18 +32,23 @@
         }
     </script>
 <style type="text/tailwindcss">
-        body {
-            font-family: 'Inter', sans-serif;
-            color: #0D0D0D;
+        @layer base {
+            body {
+                @apply font-sans text-primary bg-background-light antialiased;
+            }
+            h1, h2, h3, h4 {
+                @apply font-bold tracking-tight;
+            }
         }
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 20;
-        }table { border-collapse: collapse; }
-        th { font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
-        ::-webkit-scrollbar { width: 6px; height: 6px; }
-        ::-webkit-scrollbar-track { background: #F7F7F7; }
-        ::-webkit-scrollbar-thumb { background: #D1D1D1; }
-        ::-webkit-scrollbar-thumb:hover { background: #0D0D0D; }
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FFFFFF;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #E5E5E5;
+        }
         .sidebar-link {
             @apply flex items-center gap-3 px-8 py-3 text-slate-gray hover:text-primary transition-all duration-200 text-sm font-medium border-r-2 border-transparent;
         }
@@ -52,20 +57,31 @@
         }
     </style>
 </head>
-<body class="bg-background-light text-primary antialiased overflow-hidden font-display">
-<div class="flex h-screen w-full overflow-hidden bg-white">
+<body class="overflow-hidden flex flex-col h-screen">
+<header class="w-full border-b border-[#E5E5E5] bg-white shrink-0 z-50">
+<div class="max-w-[1200px] mx-auto flex items-center justify-between px-6 py-4">
+<div class="flex items-center gap-10">
+<a class="flex items-center gap-2" href="index.html">
+<span class="material-symbols-outlined text-primary text-2xl">account_balance</span>
+<span class="font-bold text-xl tracking-tight font-display">OneVault</span>
+</a>
+<nav class="hidden md:flex items-center gap-8 text-sm font-medium">
+<a class="text-slate-500 hover:text-primary transition-colors font-display" href="allocator.html">Allocate</a>
+<a class="text-slate-500 hover:text-primary transition-colors font-display" href="discover.html">Discover</a>
+<a class="text-primary border-b-2 border-primary pb-0.5 font-display" href="portfolio_main.html">Portfolio</a>
+</nav>
+</div>
+<div class="flex items-center gap-6">
+<button class="bg-primary text-white text-xs font-bold uppercase tracking-widest px-5 py-2.5 hover:bg-slate-800 transition-colors font-display">
+                Connect Wallet
+            </button>
+</div>
+</div>
+</header>
+<div class="flex flex-1 w-full flex-row overflow-hidden">
 <aside class="hidden lg:flex w-64 flex-col border-r border-border-gray bg-white h-full shrink-0">
 <div class="flex h-full flex-col justify-between py-10">
 <div class="flex flex-col gap-12">
-<div class="px-8">
-<div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-navy text-2xl">account_balance</span>
-<div class="flex flex-col">
-<span class="text-primary text-sm font-bold tracking-widest uppercase">OneVault</span>
-<span class="text-[9px] text-slate-gray font-medium tracking-[0.2em] uppercase">Private Wealth</span>
-</div>
-</div>
-</div>
 <nav class="flex flex-col">
 <a class="sidebar-link" href="portfolio_main.html">
 <span class="material-symbols-outlined text-[20px]">grid_view</span>
@@ -87,19 +103,9 @@
 </div>
 </div>
 </aside>
-<main class="flex flex-1 flex-col overflow-y-auto bg-white">
-<div class="lg:hidden flex items-center justify-between p-6 border-b border-border-gray bg-white">
-<div class="flex items-center gap-3">
-<div class="h-6 w-6 bg-navy flex items-center justify-center text-white">
-<span class="material-symbols-outlined text-xs">account_balance</span>
-</div>
-<span class="font-bold text-xs uppercase tracking-widest">OneVault</span>
-</div>
-<button class="text-primary">
-<span class="material-symbols-outlined">menu</span>
-</button>
-</div>
-<div class="flex flex-col gap-8 px-8 py-10 md:px-12 lg:py-14">
+<main class="flex-1 flex flex-col h-full overflow-hidden bg-white">
+<div class="flex-1 overflow-y-auto p-8 md:p-12">
+<div class="max-w-6xl mx-auto space-y-8">
 <div class="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between border-b border-primary pb-8">
 <div>
 <h2 class="text-4xl font-light tracking-tight text-primary">Transactions</h2>
@@ -161,28 +167,28 @@
 <input class="block w-full border-0 border-b border-border-gray bg-transparent py-2 pl-7 pr-4 text-xs font-medium placeholder-gray-300 focus:border-primary focus:ring-0 transition-all uppercase tracking-wider" placeholder="Search by Hash / Asset" type="text"/>
 </div>
 </div>
-<div class="mt-4 border-t border-primary">
+<div class="border-t border-primary">
 <div class="overflow-x-auto">
-<table class="w-full text-left text-xs">
+<table class="w-full text-left text-xs" style="border-collapse:collapse;">
 <thead>
 <tr class="border-b border-border-gray">
-<th class="px-2 py-6 text-[10px] text-gray-400" scope="col">Type</th>
-<th class="px-2 py-6 text-[10px] text-gray-400" scope="col">Timestamp</th>
-<th class="px-2 py-6 text-[10px] text-gray-400" scope="col">Asset</th>
-<th class="px-2 py-6 text-[10px] text-gray-400 text-right" scope="col">Amount</th>
-<th class="px-2 py-6 text-[10px] text-gray-400 text-center" scope="col">Status</th>
-<th class="px-2 py-6 text-[10px] text-gray-400 text-right" scope="col">Blockchain ID</th>
+<th class="px-2 py-6 text-[10px] font-bold text-primary uppercase tracking-[0.15em]" scope="col">Type</th>
+<th class="px-2 py-6 text-[10px] font-bold text-primary uppercase tracking-[0.15em]" scope="col">Timestamp</th>
+<th class="px-2 py-6 text-[10px] font-bold text-primary uppercase tracking-[0.15em]" scope="col">Asset</th>
+<th class="px-2 py-6 text-[10px] font-bold text-primary uppercase tracking-[0.15em] text-right" scope="col">Amount</th>
+<th class="px-2 py-6 text-[10px] font-bold text-primary uppercase tracking-[0.15em] text-center" scope="col">Status</th>
+<th class="px-2 py-6 text-[10px] font-bold text-primary uppercase tracking-[0.15em] text-right" scope="col">Blockchain ID</th>
 </tr>
 </thead>
 <tbody class="divide-y divide-border-gray">
-<tr class="hover:bg-gray-50/50 transition-colors">
+<tr class="hover:bg-gray-50 transition-colors">
 <td class="whitespace-nowrap px-2 py-5">
 <div class="flex items-center gap-3">
 <span class="material-symbols-outlined text-[16px] text-gray-400">south_west</span>
 <span class="font-semibold uppercase tracking-wider">Deposit</span>
 </div>
 </td>
-<td class="whitespace-nowrap px-2 py-5 text-gray-500 font-medium">Oct 24, 2023 · 14:00</td>
+<td class="whitespace-nowrap px-2 py-5 text-slate-gray font-medium">Oct 24, 2023 · 14:00</td>
 <td class="whitespace-nowrap px-2 py-5">
 <div class="flex items-center gap-2">
 <span class="w-2 h-2 rounded-full bg-blue-500"></span>
@@ -194,20 +200,20 @@
 <span class="text-[9px] font-bold uppercase tracking-widest text-green-600 bg-green-50 px-3 py-1">Success</span>
 </td>
 <td class="whitespace-nowrap px-2 py-5 text-right">
-<a class="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-widest text-gray-400 hover:text-navy transition-colors" href="#">
+<a class="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-widest text-slate-gray hover:text-navy transition-colors" href="#">
                                         0x8a...2b
                                         <span class="material-symbols-outlined text-[12px]">north_east</span>
 </a>
 </td>
 </tr>
-<tr class="hover:bg-gray-50/50 transition-colors">
+<tr class="hover:bg-gray-50 transition-colors">
 <td class="whitespace-nowrap px-2 py-5">
 <div class="flex items-center gap-3">
 <span class="material-symbols-outlined text-[16px] text-gray-400">swap_horiz</span>
 <span class="font-semibold uppercase tracking-wider">Swap</span>
 </div>
 </td>
-<td class="whitespace-nowrap px-2 py-5 text-gray-500 font-medium">Oct 24, 2023 · 12:30</td>
+<td class="whitespace-nowrap px-2 py-5 text-slate-gray font-medium">Oct 24, 2023 · 12:30</td>
 <td class="whitespace-nowrap px-2 py-5">
 <div class="flex items-center gap-2">
 <span class="font-semibold">ETH</span>
@@ -220,20 +226,20 @@
 <span class="text-[9px] font-bold uppercase tracking-widest text-amber-600 bg-amber-50 px-3 py-1">Pending</span>
 </td>
 <td class="whitespace-nowrap px-2 py-5 text-right">
-<a class="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-widest text-gray-400 hover:text-navy transition-colors" href="#">
+<a class="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-widest text-slate-gray hover:text-navy transition-colors" href="#">
                                         0x3c...9f
                                         <span class="material-symbols-outlined text-[12px]">north_east</span>
 </a>
 </td>
 </tr>
-<tr class="hover:bg-gray-50/50 transition-colors">
+<tr class="hover:bg-gray-50 transition-colors">
 <td class="whitespace-nowrap px-2 py-5">
 <div class="flex items-center gap-3">
 <span class="material-symbols-outlined text-[16px] text-gray-400">military_tech</span>
 <span class="font-semibold uppercase tracking-wider">Reward</span>
 </div>
 </td>
-<td class="whitespace-nowrap px-2 py-5 text-gray-500 font-medium">Oct 23, 2023 · 09:15</td>
+<td class="whitespace-nowrap px-2 py-5 text-slate-gray font-medium">Oct 23, 2023 · 09:15</td>
 <td class="whitespace-nowrap px-2 py-5">
 <div class="flex items-center gap-2">
 <span class="w-2 h-2 rounded-full bg-navy"></span>
@@ -245,20 +251,20 @@
 <span class="text-[9px] font-bold uppercase tracking-widest text-green-600 bg-green-50 px-3 py-1">Success</span>
 </td>
 <td class="whitespace-nowrap px-2 py-5 text-right">
-<a class="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-widest text-gray-400 hover:text-navy transition-colors" href="#">
+<a class="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-widest text-slate-gray hover:text-navy transition-colors" href="#">
                                         0x1d...4a
                                         <span class="material-symbols-outlined text-[12px]">north_east</span>
 </a>
 </td>
 </tr>
-<tr class="hover:bg-gray-50/50 transition-colors">
+<tr class="hover:bg-gray-50 transition-colors">
 <td class="whitespace-nowrap px-2 py-5">
 <div class="flex items-center gap-3">
 <span class="material-symbols-outlined text-[16px] text-gray-400">north_east</span>
 <span class="font-semibold uppercase tracking-wider">Withdrawal</span>
 </div>
 </td>
-<td class="whitespace-nowrap px-2 py-5 text-gray-500 font-medium">Oct 22, 2023 · 16:45</td>
+<td class="whitespace-nowrap px-2 py-5 text-slate-gray font-medium">Oct 22, 2023 · 16:45</td>
 <td class="whitespace-nowrap px-2 py-5">
 <div class="flex items-center gap-2">
 <span class="w-2 h-2 rounded-full bg-orange-500"></span>
@@ -270,7 +276,7 @@
 <span class="text-[9px] font-bold uppercase tracking-widest text-red-600 bg-red-50 px-3 py-1">Failed</span>
 </td>
 <td class="whitespace-nowrap px-2 py-5 text-right">
-<a class="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-widest text-gray-400 hover:text-navy transition-colors" href="#">
+<a class="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-widest text-slate-gray hover:text-navy transition-colors" href="#">
                                         0x9e...1c
                                         <span class="material-symbols-outlined text-[12px]">north_east</span>
 </a>
@@ -280,20 +286,16 @@
 </table>
 </div>
 <div class="flex items-center justify-between py-10 border-t border-border-gray">
-<p class="text-[10px] font-bold uppercase tracking-widest text-gray-400">
+<span class="text-[10px] font-bold uppercase tracking-widest text-slate-gray">
                         Record <span class="text-primary">1 - 4</span> of <span class="text-primary">128</span>
-</p>
-<div class="flex items-center gap-6">
-<button class="text-gray-300 hover:text-primary transition-colors disabled:opacity-20" disabled="">
-<span class="material-symbols-outlined">chevron_left</span>
-</button>
-<button class="text-primary hover:text-navy transition-colors">
-<span class="material-symbols-outlined">chevron_right</span>
-</button>
+</span>
+<div class="flex items-center gap-8">
+<button class="text-[10px] font-bold text-primary uppercase tracking-widest hover:text-navy transition-colors" disabled="">Previous</button>
+<button class="text-[10px] font-bold text-primary uppercase tracking-widest hover:text-navy transition-colors">Next Page</button>
 </div>
 </div>
 </div>
-<div class="h-12"></div>
+</div>
 </div>
 </main>
 </div>
